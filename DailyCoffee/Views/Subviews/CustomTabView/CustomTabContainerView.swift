@@ -13,11 +13,14 @@ struct CustomTabContainerView<Content: View>: View {
     var selection: TabBarItem
     @State
     private var tabs: [TabBarItem] = []
+    @Binding
+    var favoriteViewPresented: Bool
     
     let content: Content
     
-    init(selection: Binding<TabBarItem>, @ViewBuilder content: () -> Content) {
+    init(selection: Binding<TabBarItem>, favoriteViewPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self._selection = selection
+        self._favoriteViewPresented = favoriteViewPresented
         self.content = content()
     }
     var body: some View {
@@ -25,7 +28,7 @@ struct CustomTabContainerView<Content: View>: View {
             ZStack {
                 content
             }
-            CustomTabBarView(tabs: tabs, selectedTab: $selection)
+            CustomTabBarView(tabs: tabs, selectedTab: $selection, favoriteViewPresented: $favoriteViewPresented)
         }
         .onPreferenceChange(TabBarItemsPreferenceKey.self) { value in
             self.tabs = value

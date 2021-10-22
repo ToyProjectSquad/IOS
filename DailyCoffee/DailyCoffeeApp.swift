@@ -10,13 +10,16 @@ import Firebase
 
 @main
 struct DailyCoffeeApp: App {
-    let persistenceController = PersistenceController.shared
 
+    @StateObject
+    var detailVM: DetailViewModel = DetailViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            CustomTabView()
-//            CustomTabBarView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView {
+                CustomTabView()
+            }
+            .environmentObject(detailVM)
         }
     }
 }

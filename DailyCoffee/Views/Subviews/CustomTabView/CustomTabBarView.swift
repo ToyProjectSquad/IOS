@@ -15,6 +15,8 @@ struct CustomTabBarView: View {
     private var namespace
     @Binding
     var selectedTab: TabBarItem
+    @Binding
+    var favoriteViewPresented: Bool
     
     var body: some View {
         HStack(alignment: .bottom) {
@@ -37,8 +39,13 @@ struct CustomTabBarView: View {
 extension CustomTabBarView {
     
     private var coffeeIcon: some View {
-        Image("CoffeeCup")
-            .padding(.bottom, 60)
+        Button {
+            favoriteViewPresented.toggle()
+        } label: {
+            Image("CoffeeCup")
+        }
+        .padding(.bottom, 60)
+
     }
     
     private func tabView(item: TabBarItem) -> some View {

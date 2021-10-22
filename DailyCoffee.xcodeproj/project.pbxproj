@@ -10,11 +10,13 @@
 		040F0D05587FDF583FB1F2A0 /* Pods_DailyCoffeeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */; };
 		0D508C5D6B340F82C18377E9 /* Pods_DailyCoffee_DailyCoffeeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */; };
 		8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */; };
+		EB4034A227226EA100B2C10D /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4034A127226EA100B2C10D /* DailyView.swift */; };
+		EB4034A427226EB600B2C10D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4034A327226EB600B2C10D /* ListView.swift */; };
+		EB4034A627227F9700B2C10D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4034A527227F9700B2C10D /* DetailViewModel.swift */; };
+		EB4034A82722884500B2C10D /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4034A72722884500B2C10D /* ImagePickerModel.swift */; };
 		EBDE4FBC271D0B2200A4FDBC /* DailyCoffeeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FBB271D0B2200A4FDBC /* DailyCoffeeApp.swift */; };
-		EBDE4FBE271D0B2200A4FDBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FBD271D0B2200A4FDBC /* ContentView.swift */; };
 		EBDE4FC0271D0B2300A4FDBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDE4FBF271D0B2300A4FDBC /* Assets.xcassets */; };
 		EBDE4FC3271D0B2300A4FDBC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDE4FC2271D0B2300A4FDBC /* Preview Assets.xcassets */; };
-		EBDE4FC5271D0B2300A4FDBC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FC4271D0B2300A4FDBC /* Persistence.swift */; };
 		EBDE4FC8271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FC6271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld */; };
 		EBDE4FD2271D0B2300A4FDBC /* DailyCoffeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FD1271D0B2300A4FDBC /* DailyCoffeeTests.swift */; };
 		EBDE4FDC271D0B2300A4FDBC /* DailyCoffeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FDB271D0B2300A4FDBC /* DailyCoffeeUITests.swift */; };
@@ -23,7 +25,7 @@
 		EBDE4FF1271D148B00A4FDBC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF0271D148B00A4FDBC /* HomeView.swift */; };
 		EBDE4FF3271D149300A4FDBC /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF2271D149300A4FDBC /* HistoryView.swift */; };
 		EBDE4FF5271D149D00A4FDBC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF4271D149D00A4FDBC /* MapView.swift */; };
-		EBDE4FF7271D14E000A4FDBC /* DailyFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF6271D14E000A4FDBC /* DailyFavoriteView.swift */; };
+		EBDE4FF7271D14E000A4FDBC /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF6271D14E000A4FDBC /* FavoriteView.swift */; };
 		EBDE4FF9271D1FA100A4FDBC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FF8271D1FA100A4FDBC /* DetailView.swift */; };
 		EBDE4FFB271D1FA900A4FDBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */; };
 		EBDE4FFD271D1FBC00A4FDBC /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE4FFC271D1FBC00A4FDBC /* CustomTabBarView.swift */; };
@@ -62,12 +64,14 @@
 		A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A585935A88948CA810DC5DE6 /* Pods-DailyCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee/Pods-DailyCoffee.release.xcconfig"; sourceTree = "<group>"; };
 		B641307930231221C740A517 /* Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EB4034A127226EA100B2C10D /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		EB4034A327226EB600B2C10D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		EB4034A527227F9700B2C10D /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		EB4034A72722884500B2C10D /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		EBDE4FB8271D0B2200A4FDBC /* DailyCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDE4FBB271D0B2200A4FDBC /* DailyCoffeeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCoffeeApp.swift; sourceTree = "<group>"; };
-		EBDE4FBD271D0B2200A4FDBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EBDE4FBF271D0B2300A4FDBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBDE4FC2271D0B2300A4FDBC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EBDE4FC4271D0B2300A4FDBC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EBDE4FC7271D0B2300A4FDBC /* DailyCoffee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailyCoffee.xcdatamodel; sourceTree = "<group>"; };
 		EBDE4FCD271D0B2300A4FDBC /* DailyCoffeeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyCoffeeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDE4FD1271D0B2300A4FDBC /* DailyCoffeeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCoffeeTests.swift; sourceTree = "<group>"; };
@@ -78,7 +82,7 @@
 		EBDE4FF0271D148B00A4FDBC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EBDE4FF2271D149300A4FDBC /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		EBDE4FF4271D149D00A4FDBC /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		EBDE4FF6271D14E000A4FDBC /* DailyFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFavoriteView.swift; sourceTree = "<group>"; };
+		EBDE4FF6271D14E000A4FDBC /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		EBDE4FF8271D1FA100A4FDBC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EBDE4FFC271D1FBC00A4FDBC /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
@@ -143,6 +147,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EB40349F272251AB00B2C10D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EB4034A527227F9700B2C10D /* DetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EB4034A027226E6C00B2C10D /* FavoriteView */ = {
+			isa = PBXGroup;
+			children = (
+				EBDE4FF6271D14E000A4FDBC /* FavoriteView.swift */,
+				EB4034A127226EA100B2C10D /* DailyView.swift */,
+				EB4034A327226EB600B2C10D /* ListView.swift */,
+			);
+			path = FavoriteView;
+			sourceTree = "<group>";
+		};
 		EBDE4FAF271D0B2200A4FDBC = {
 			isa = PBXGroup;
 			children = (
@@ -169,12 +191,11 @@
 			isa = PBXGroup;
 			children = (
 				EBDE4FED271D138100A4FDBC /* Models */,
+				EB40349F272251AB00B2C10D /* ViewModels */,
 				EBDE4FEC271D137800A4FDBC /* Views */,
 				EBDE4FEA271D0DD900A4FDBC /* GoogleService-Info.plist */,
 				EBDE4FBB271D0B2200A4FDBC /* DailyCoffeeApp.swift */,
-				EBDE4FBD271D0B2200A4FDBC /* ContentView.swift */,
 				EBDE4FBF271D0B2300A4FDBC /* Assets.xcassets */,
-				EBDE4FC4271D0B2300A4FDBC /* Persistence.swift */,
 				EBDE4FC6271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld */,
 				EBDE500C271D506D00A4FDBC /* LaunchScreen.storyboard */,
 				EBDE4FC1271D0B2300A4FDBC /* Preview Content */,
@@ -220,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				EBDE5000271D26B400A4FDBC /* Extensions */,
+				EB4034A72722884500B2C10D /* ImagePickerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,10 +258,10 @@
 		EBDE4FEF271D146600A4FDBC /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
+				EB4034A027226E6C00B2C10D /* FavoriteView */,
 				EBDE4FF0271D148B00A4FDBC /* HomeView.swift */,
 				EBDE4FF2271D149300A4FDBC /* HistoryView.swift */,
 				EBDE4FF4271D149D00A4FDBC /* MapView.swift */,
-				EBDE4FF6271D14E000A4FDBC /* DailyFavoriteView.swift */,
 				EBDE4FF8271D1FA100A4FDBC /* DetailView.swift */,
 				EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */,
 				EBDE5007271D464100A4FDBC /* CustomTabView.swift */,
@@ -506,19 +528,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBDE4FF7271D14E000A4FDBC /* DailyFavoriteView.swift in Sources */,
+				EBDE4FF7271D14E000A4FDBC /* FavoriteView.swift in Sources */,
 				EBDE4FF9271D1FA100A4FDBC /* DetailView.swift in Sources */,
 				EBDE500B271D498100A4FDBC /* CustomTabBarItem.swift in Sources */,
+				EB4034A427226EB600B2C10D /* ListView.swift in Sources */,
 				EBDE4FF5271D149D00A4FDBC /* MapView.swift in Sources */,
-				EBDE4FC5271D0B2300A4FDBC /* Persistence.swift in Sources */,
 				EBDE4FF3271D149300A4FDBC /* HistoryView.swift in Sources */,
 				EBDE5006271D437B00A4FDBC /* CustomTabPreferenceKey.swift in Sources */,
 				EBDE4FFB271D1FA900A4FDBC /* SettingsView.swift in Sources */,
 				EBDE4FFF271D1FC600A4FDBC /* CustomAlertView.swift in Sources */,
-				EBDE4FBE271D0B2200A4FDBC /* ContentView.swift in Sources */,
+				EB4034A227226EA100B2C10D /* DailyView.swift in Sources */,
 				EBDE4FFD271D1FBC00A4FDBC /* CustomTabBarView.swift in Sources */,
 				EBDE4FBC271D0B2200A4FDBC /* DailyCoffeeApp.swift in Sources */,
 				EBDE5008271D464100A4FDBC /* CustomTabView.swift in Sources */,
+				EB4034A82722884500B2C10D /* ImagePickerModel.swift in Sources */,
+				EB4034A627227F9700B2C10D /* DetailViewModel.swift in Sources */,
 				EBDE4FF1271D148B00A4FDBC /* HomeView.swift in Sources */,
 				EBDE4FC8271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld in Sources */,
 				EBDE5002271D26DF00A4FDBC /* ColorExtension.swift in Sources */,
@@ -687,6 +711,8 @@
 				DEVELOPMENT_TEAM = XJU34KVARY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to access camera";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Need to access photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -719,6 +745,8 @@
 				DEVELOPMENT_TEAM = XJU34KVARY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to access camera";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Need to access photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

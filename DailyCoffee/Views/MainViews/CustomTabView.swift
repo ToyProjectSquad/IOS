@@ -11,9 +11,11 @@ struct CustomTabView: View {
     
     @State
     private var tabSelection: TabBarItem = .home
+    @State
+    private var favoriteViewPresented: Bool = false
     
     var body: some View {
-        CustomTabContainerView(selection: $tabSelection) {
+        CustomTabContainerView(selection: $tabSelection, favoriteViewPresented: $favoriteViewPresented) {
             HomeView()
                 .tabBarItem(tab: .home, selection: $tabSelection)
             HistoryView()
@@ -22,6 +24,9 @@ struct CustomTabView: View {
                 .tabBarItem(tab: .map, selection: $tabSelection)
             SettingsView()
                 .tabBarItem(tab: .settings, selection: $tabSelection)
+        }
+        .sheet(isPresented: $favoriteViewPresented) {
+            FavoriteView()
         }
     }
 }
