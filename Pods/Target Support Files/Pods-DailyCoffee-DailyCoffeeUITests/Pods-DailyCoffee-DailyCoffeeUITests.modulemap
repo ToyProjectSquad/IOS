@@ -1,0 +1,6 @@
+framework module Pods_DailyCoffee_DailyCoffeeUITests {
+  umbrella header "Pods-DailyCoffee-DailyCoffeeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
