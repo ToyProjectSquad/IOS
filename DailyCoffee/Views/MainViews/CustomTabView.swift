@@ -9,6 +9,12 @@ import SwiftUI
 
 struct CustomTabView: View {
     
+    @EnvironmentObject
+    var userVM: UserViewModel
+    
+    @StateObject
+    var coffeeVM: CoffeeViewModel = CoffeeViewModel()
+    
     @State
     private var tabSelection: TabBarItem = .home
     @State
@@ -16,7 +22,7 @@ struct CustomTabView: View {
     
     var body: some View {
         CustomTabContainerView(selection: $tabSelection, favoriteViewPresented: $favoriteViewPresented) {
-            HomeView()
+            HomeView(coffeeVM: coffeeVM)
                 .tabBarItem(tab: .home, selection: $tabSelection)
             HistoryView()
                 .tabBarItem(tab: .history, selection: $tabSelection)
@@ -27,6 +33,7 @@ struct CustomTabView: View {
         }
         .sheet(isPresented: $favoriteViewPresented) {
             FavoriteView()
+                .environmentObject(coffeeVM)
         }
     }
 }

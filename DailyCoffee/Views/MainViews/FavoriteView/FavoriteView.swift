@@ -8,23 +8,28 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    // MARK: - Variables
+    
+    // State Object
+    @StateObject
+    var detailVM: DetailViewModel = DetailViewModel()
+    
+    // State
     @State
     var selection: Int = 0
-    @EnvironmentObject
-    var detailVM: DetailViewModel
 
+    // MARK: - Body view
     var body: some View {
         ZStack {
-            Color("Background").ignoresSafeArea()
+            backgroundView
             VStack(spacing: 0) {
                 Spacer().frame(height: 70)
                 HStack(alignment: .top) {
-                    titleField
+                    titleView
                         .padding(.bottom, 40)
                     Spacer()
                     plusButton
                         .padding(.trailing, 18)
-
                 }
                 TabView(selection: $selection) {
                     DailyView()
@@ -37,51 +42,71 @@ struct FavoriteView: View {
             }
             .opacity(0.8)
         }
-        .overlay(
-            ZStack(alignment: .top) {
-                if detailVM.isPresent {
-                    DetailView()
-                        .onAppear {
-                            print("detailView is presenting")
-                        }
-                }
+        .onTapGesture {
+            withAnimation {
+                detailVM.isPresent = false
             }
-        )
+        }
+        .blur(radius: detailVM.isPresent ? 20 : 0)
+        .overlay(detailView.scaleEffect(detailVM.isPresent ? 1 : 0))
     }
     
-    private var titleField: some View {
+}
+
+// MARK: - Components
+extension FavoriteView {
+    private var backgroundView: some View {
+        Color("Background")
+            .ignoresSafeArea()
+    }
+    
+    private var titleView: some View {
         HStack(spacing: 10) {
             Text("오늘의 커피")
                 .font(.system(size: selection == 0 ? 24 : 20, weight: .bold, design: .default))
                 .foregroundColor(selection == 0 ? Color("TextColor") : Color(hex: "#606060"))
                 .onTapGesture {
-                    selection = 0
+                    withAnimation {
+                        selection = 0
+                    }
                 }
                 .padding(.leading, 18)
             Text("즐겨찾기")
                 .font(.system(size: selection == 1 ? 24 : 20, weight: .bold, design: .default))
-                .foregroundColor(selection == 0 ? Color("TextColor") : Color(hex: "#606060"))
+                .foregroundColor(selection == 1 ? Color("TextColor") : Color(hex: "#606060"))
                 .onTapGesture {
-                    selection = 1
+                    withAnimation {
+                        selection = 1
+                    }
                 }
             Spacer()
         }
     }
+    
     private var plusButton: some View {
         Button {
-            detailVM.isPresent.toggle()
-            detailVM.isEditMode = true
-            detailVM.selectedItem = nil
+            withAnimation {
+                detailVM.isEditMode = true
+                detailVM.selectedItem = nil
+                detailVM.isPresent.toggle()
+            }
         } label: {
             Image(systemName: "plus.app")
                 .resizable()
                 .frame(width: 30, height: 30)
         }
+        .disabled(selection == 1 ? false : true)
+        .opacity(selection == 1 ? 1 : 0)
     }
-}
-
-struct FavoriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteView()
+    
+    private var detailView: some View {
+        ZStack(alignment: .top) {
+            if detailVM.isPresent {
+                DetailView(detailVM: detailVM)
+                    .cornerRadius(15)
+                    .padding([.leading, .trailing], 15)
+                    .padding([.top, .bottom], 100)
+            }
+        }
     }
 }

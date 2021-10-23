@@ -12,14 +12,21 @@ import Firebase
 struct DailyCoffeeApp: App {
 
     @StateObject
-    var detailVM: DetailViewModel = DetailViewModel()
+    var userVM: UserViewModel = UserViewModel()
+    
+    @AppStorage("userID") var userID: String?
     
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                CustomTabView()
+                if let _ = userID {
+                    CustomTabView()
+                }
+                else {
+                    SetupView()
+                }
             }
-            .environmentObject(detailVM)
+            .environmentObject(userVM)
         }
     }
 }

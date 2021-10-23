@@ -25,7 +25,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="favorite" inverseEntity="User"/>
     </entity>
     <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
         <relationship name="coffees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Coffee" inverseName="consumedDate" inverseEntity="Coffee"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="history" inverseEntity="User"/>
     </entity>
@@ -38,10 +38,10 @@
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="History" inverseName="user" inverseEntity="History"/>
     </entity>
     <elements>
-        <element name="User" positionX="-88.179443359375" positionY="-66.293212890625" width="128" height="133"/>
         <element name="Cafe" positionX="179.7601318359375" positionY="-72.716552734375" width="128" height="163"/>
         <element name="Coffee" positionX="-388.6322631835938" positionY="-60.8006591796875" width="128" height="163"/>
-        <element name="History" positionX="-117.3482666015625" positionY="-285.8388366699219" width="128" height="88"/>
         <element name="Favorite" positionX="-100.80615234375" positionY="201.9337158203125" width="128" height="73"/>
+        <element name="History" positionX="-117.3482666015625" positionY="-285.8388366699219" width="128" height="88"/>
+        <element name="User" positionX="-88.179443359375" positionY="-66.293212890625" width="128" height="133"/>
     </elements>
 </model>
