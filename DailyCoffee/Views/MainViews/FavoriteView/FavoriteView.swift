@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct FavoriteView: View {
-    // MARK: - Variables
+    // MARK: - VARIABLES
     
     // State Object
     @StateObject
     var detailVM: DetailViewModel = DetailViewModel()
     
+    // Environment Object
+    @EnvironmentObject
+    var coffeeVM: CoffeeViewModel
+    
     // State
     @State
     var selection: Int = 0
+    @State
+    var selectedCoffee: Coffee? = nil
 
-    // MARK: - Body view
+    // MARK: - BODY
     var body: some View {
         ZStack {
             backgroundView
+                .blur(radius: detailVM.isPresent ? 20 : 0)
             VStack(spacing: 0) {
                 Spacer().frame(height: 70)
                 HStack(alignment: .top) {
@@ -31,29 +38,24 @@ struct FavoriteView: View {
                     plusButton
                         .padding(.trailing, 18)
                 }
-                TabView(selection: $selection) {
-                    DailyView()
-                        .tag(0)
-                    ListView()
-                        .tag(1)
-                }
-                .cornerRadius(15)
-                .padding(18)
+                contentView
+                    .cornerRadius(15)
+                    .padding(18)
             }
+            .blur(radius: detailVM.isPresent ? 20 : 0)
             .opacity(0.8)
-        }
-        .onTapGesture {
-            withAnimation {
-                detailVM.isPresent = false
+            if detailVM.isPresent {
+                detailView
             }
         }
-        .blur(radius: detailVM.isPresent ? 20 : 0)
-        .overlay(detailView.scaleEffect(detailVM.isPresent ? 1 : 0))
+        .onAppear {
+            coffeeVM.getCoffeeWithHistory()
+        }
     }
     
 }
 
-// MARK: - Components
+// MARK: - COMPONENTS
 extension FavoriteView {
     private var backgroundView: some View {
         Color("Background")
@@ -68,6 +70,7 @@ extension FavoriteView {
                 .onTapGesture {
                     withAnimation {
                         selection = 0
+                        coffeeVM.getCoffeeWithHistory()
                     }
                 }
                 .padding(.leading, 18)
@@ -77,6 +80,7 @@ extension FavoriteView {
                 .onTapGesture {
                     withAnimation {
                         selection = 1
+                        coffeeVM.getCoffeeWithFavorite()
                     }
                 }
             Spacer()
@@ -86,9 +90,7 @@ extension FavoriteView {
     private var plusButton: some View {
         Button {
             withAnimation {
-                detailVM.isEditMode = true
-                detailVM.selectedItem = nil
-                detailVM.isPresent.toggle()
+                detailVM.setEditMode()
             }
         } label: {
             Image(systemName: "plus.app")
@@ -99,14 +101,48 @@ extension FavoriteView {
         .opacity(selection == 1 ? 1 : 0)
     }
     
-    private var detailView: some View {
-        ZStack(alignment: .top) {
-            if detailVM.isPresent {
-                DetailView(detailVM: detailVM)
-                    .cornerRadius(15)
-                    .padding([.leading, .trailing], 15)
-                    .padding([.top, .bottom], 100)
+    private var contentView: some View {
+        List {
+            ForEach(coffeeVM.coffees) { coffee in
+                HStack {
+                    Image(uiImage: UIImage(data: coffee.image!) ?? UIImage(named: "Placeholder")!)
+                        .resizable()
+                        .frame(width: 55, height: 55)
+                        .cornerRadius(15)
+                        .shadow(color: .black, radius: 5, x: 0, y: 2)
+                        .padding(8)
+                    VStack(alignment: .leading) {
+                        Text(coffee.title ?? "Coffee")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(Color("TextColor"))
+                        Text("\(String(format: "%.2f", coffee.size))ml/\(String(format: "%.2f", coffee.caffeine))mg")
+                            .padding(.leading, 30)
+                            .font(.system(size: 15))
+                    }
+                }
+                .contextMenu {
+                    Button {
+                        coffeeVM.addCoffeeToDaily(coffee: coffee)
+                    } label: {
+                        Text("Add to daily")
+                    }
+                    .disabled(selection == 0 ? true : false)
+                    
+                    Button {
+                        detailVM.setSelectMode(coffee: coffee)
+                    } label: {
+                        Text("Show detail")
+                    }
+                }
             }
+            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeInFavorite)
         }
+    }
+    
+    private var detailView: some View {
+        DetailView(detailVM: detailVM)
+            .cornerRadius(15)
+            .padding([.leading, .trailing], 15)
+            .padding([.top, .bottom], 100)
     }
 }

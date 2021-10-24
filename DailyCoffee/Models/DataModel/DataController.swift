@@ -19,7 +19,6 @@ class DataController {
 
     init(modelName:String) {
         persistentContainer = NSPersistentContainer(name: modelName)
-        
         load()
     }
 

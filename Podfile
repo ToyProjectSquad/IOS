@@ -7,6 +7,7 @@ target 'DailyCoffee' do
 
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'GoogleMaps', '5.2.0'
 
   # Pods for DailyCoffee
 

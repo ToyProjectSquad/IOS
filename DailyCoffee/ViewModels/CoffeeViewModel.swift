@@ -10,8 +10,9 @@ import CoreData
 
 class CoffeeViewModel: ObservableObject {
     
-    @Published var dailyCoffees: [Coffee] = []
-    @Published var favoriteCoffees: [Coffee] = []
+    @Published var coffees: [Coffee] = []
+//    @Published var dailyCoffees: [Coffee] = []
+//    @Published var favoriteCoffees: [Coffee] = []
     
     private var controller = DataController.instance
     private var user: User? = nil
@@ -30,7 +31,7 @@ class CoffeeViewModel: ObservableObject {
         request.sortDescriptors = []
         
         do {
-            dailyCoffees = try controller.viewContext.fetch(request)
+            coffees = try controller.viewContext.fetch(request)
         } catch {
             fatalError("ERROR: Can't get coffees with history")
         }
@@ -50,11 +51,11 @@ class CoffeeViewModel: ObservableObject {
             request.sortDescriptors = []
             
             do {
-                favoriteCoffees = try controller.viewContext.fetch(request)
+                coffees = try controller.viewContext.fetch(request)
             } catch {
                 fatalError("ERROR: Can't get coffees with favorite")
             }
-            print("Successfully get coffees!\(favoriteCoffees.count)")
+            print("Successfully get coffees!\(coffees.count)")
         }
     }
     
@@ -76,11 +77,60 @@ class CoffeeViewModel: ObservableObject {
     
     func deleteCoffeeInFavorite(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        let object = favoriteCoffees[index]
+        let object = coffees[index]
         controller.viewContext.delete(object)
         
         controller.save()
         getCoffeeWithFavorite()
+    }
+    
+    func deleteCoffeeInFavorite(coffee: Coffee) {
+        controller.viewContext.delete(coffee)
+        controller.save()
+        getCoffeeWithFavorite()
+    }
+    
+    func addCoffeeToDaily(coffee: Coffee) {
+        getHistory(date: Date())
+        let todayHistory = histories.first!
+        let copiedObject: Coffee = Coffee(context: controller.viewContext)
+        copiedObject.id = UUID().uuidString
+        copiedObject.caffeine = coffee.caffeine
+        copiedObject.title = coffee.title
+        copiedObject.image = coffee.image
+        copiedObject.size = coffee.size
+        todayHistory.addToCoffees(copiedObject)
+        
+        controller.save()
+    }
+    
+    func addCoffeeToDaily(caffeine: Double, size: Double, image: UIImage, title: String) {
+        getHistory(date: Date())
+        let todayHistory = histories.first!
+        let newCoffee: Coffee = Coffee(context: controller.viewContext)
+        newCoffee.id = UUID().uuidString
+        newCoffee.caffeine = caffeine
+        newCoffee.title = title
+        newCoffee.image = image.pngData()
+        newCoffee.size = size
+        todayHistory.addToCoffees(newCoffee)
+        
+        controller.save()
+    }
+    
+    func deleteCoffeeFromDaily(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let object = coffees[index]
+        controller.viewContext.delete(object)
+        
+        controller.save()
+        getCoffeeWithHistory()
+    }
+    
+    func deleteCoffeeFromDaily(coffee: Coffee) {
+        controller.viewContext.delete(coffee)
+        controller.save()
+        getCoffeeWithHistory()
     }
     
 }

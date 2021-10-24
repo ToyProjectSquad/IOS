@@ -13,7 +13,7 @@ struct HomeView: View {
     
     @EnvironmentObject
     var userVM: UserViewModel
-    @ObservedObject
+    @EnvironmentObject
     var coffeeVM: CoffeeViewModel
     
     var body: some View {
@@ -24,23 +24,13 @@ struct HomeView: View {
                 )
         }
         .onAppear {
-            configure()
+            coffeeVM.configureUser(user: userVM.user!)
         }
     }
 }
 
-extension HomeView {
-    
-    private func configure() {
-        userVM.configureID(id: userID!)
-        userVM.configureUser()
-        coffeeVM.configureUser(user: userVM.user!)
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
     }
-    
 }
-//
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(coffeeVM: CoffeeViewModel())
-//    }
-//}

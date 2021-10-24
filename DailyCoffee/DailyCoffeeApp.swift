@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import GoogleMaps
 
 @main
 struct DailyCoffeeApp: App {
@@ -15,6 +16,7 @@ struct DailyCoffeeApp: App {
     var userVM: UserViewModel = UserViewModel()
     
     @AppStorage("userID") var userID: String?
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
@@ -26,6 +28,12 @@ struct DailyCoffeeApp: App {
                     SetupView()
                 }
             }
+            .onAppear(perform: {
+                if let userID = userID {
+                    userVM.configureID(id: userID)
+                    userVM.configureUser()
+                }
+            })
             .environmentObject(userVM)
         }
     }
@@ -33,6 +41,7 @@ struct DailyCoffeeApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        GMSServices.provideAPIKey("AIzaSyASC46x_stwzmVtRB321-fU33_GDRyc6Y4")
         FirebaseApp.configure()
         return true
     }

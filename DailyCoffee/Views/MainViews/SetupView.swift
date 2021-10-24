@@ -35,6 +35,7 @@ struct SetupView: View {
                 maxCaffeineView
                 saveButton
                     .padding()
+                Spacer()
             }
         }
     }
@@ -89,8 +90,7 @@ extension SetupView {
                 isFinished = true
             }
             else {
-                // TODO
-                // Alert
+                // TODO: ALERT
             }
         } label: {
             Text("SAVE")
@@ -114,9 +114,3 @@ extension SetupView {
     }
     
 }
-//
-//struct SetupView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SetupView()
-//    }
-//}
