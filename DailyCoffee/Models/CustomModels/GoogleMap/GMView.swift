@@ -43,14 +43,6 @@ struct GMView: UIViewRepresentable {
         markers.forEach { marker in
             marker.map = uiView
         }
-        if let selectedMarker = selectedMarker {
-            let camera = GMSCameraPosition.camera(withTarget: selectedMarker.position, zoom: defaultZoomLevel)
-            print("Animating to position \(selectedMarker.position)")
-            CATransaction.begin()
-            CATransaction.setValue(NSNumber(floatLiteral: 5), forKey: kCATransactionAnimationDuration)
-            gmsMapView.animate(with: GMSCameraUpdate.setCamera(camera))
-            CATransaction.commit()
-        }
     }
     
     // MARK: - SET DELEGATE
@@ -66,13 +58,25 @@ struct GMView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-            print("\(coordinate.longitude), \(coordinate.latitude) has tapped")
             self.mapView.tappedCoordinate = coordinate
-            self.mapView.didTapped.toggle()
+            withAnimation {
+                self.mapView.didTapped.toggle()
+            }
         }
         
         func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
             self.mapView.onAnimationEnded()
+        }
+        
+        func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+            let camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: 10)
+            CATransaction.begin()
+            CATransaction.setValue(NSNumber(floatLiteral: 0.5), forKey: kCATransactionAnimationDuration)
+            mapView.animate(with: GMSCameraUpdate.setCamera(camera))
+            CATransaction.commit()
+            mapView.selectedMarker = marker
+            print("marker has tapped")
+            return true
         }
         
     }

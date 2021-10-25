@@ -36,7 +36,6 @@ struct DetailView: View {
     
     // MARK: - INIT
     init(detailVM: DetailViewModel) {
-        print("Initialize detail view")
         self.detailVM = detailVM
         if let item = detailVM.selectedItem {
             self.title = item.title ?? "이름"
@@ -86,12 +85,7 @@ struct DetailView: View {
                     Spacer()
                 }
                 .blur(radius: textfieldTapped != 0 ? 20 : 0)
-                if textfieldTapped == 1 {
-                    InputView(inputText: $size, textfieldTapped: $textfieldTapped, placeholder: "Input size here...", unit: "ml")
-                }
-                else if textfieldTapped == 2 {
-                    InputView(inputText: $caffeine, textfieldTapped: $textfieldTapped, placeholder: "Input caffeine here...", unit: "mg")
-                }
+                inputView
             }
         }
         .onAppear {
@@ -160,7 +154,7 @@ extension DetailView {
             .frame(width: 150, height: 150)
             .clipShape(Circle())
             .onTapGesture {
-                if detailVM.isEditMode && textfieldTapped == 0{
+                if detailVM.isEditMode && textfieldTapped == 0 {
                     photoModified.toggle()
                 }
             }
@@ -209,7 +203,6 @@ extension DetailView {
                 InputView(inputText: $caffeine, textfieldTapped: $textfieldTapped, placeholder: "Input caffeine here...", unit: "mg")
             }
         }
-        .frame(height: 240)
     }
     
     private var saveButton: some View {

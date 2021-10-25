@@ -104,23 +104,7 @@ extension FavoriteView {
     private var contentView: some View {
         List {
             ForEach(coffeeVM.coffees) { coffee in
-                HStack {
-                    Image(uiImage: UIImage(data: coffee.image!) ?? UIImage(named: "Placeholder")!)
-                        .resizable()
-                        .frame(width: 55, height: 55)
-                        .cornerRadius(15)
-                        .shadow(color: .black, radius: 5, x: 0, y: 2)
-                        .padding(8)
-                    VStack(alignment: .leading) {
-                        Text(coffee.title ?? "Coffee")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(Color("TextColor"))
-                        Text("\(String(format: "%.2f", coffee.size))ml/\(String(format: "%.2f", coffee.caffeine))mg")
-                            .padding(.leading, 30)
-                            .font(.system(size: 15))
-                    }
-                }
-                .contextMenu {
+                Menu {
                     Button {
                         coffeeVM.addCoffeeToDaily(coffee: coffee)
                     } label: {
@@ -133,7 +117,29 @@ extension FavoriteView {
                     } label: {
                         Text("Show detail")
                     }
+                } label: {
+                    HStack {
+                        Image(uiImage: UIImage(data: coffee.image!) ?? UIImage(named: "Placeholder")!)
+                            .resizable()
+                            .frame(width: 55, height: 55)
+                            .cornerRadius(15)
+                            .shadow(color: .black, radius: 5, x: 0, y: 2)
+                            .padding(8)
+                        VStack(alignment: .leading) {
+                            Text(coffee.title ?? "Coffee")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(String(format: "%.2f", coffee.size))ml/\(String(format: "%.2f", coffee.caffeine))mg")
+                                .padding(.leading, 30)
+                                .font(.system(size: 15))
+                        }
+                    }
                 }
+
+//                
+//                .contextMenu {
+//                    
+//                }
             }
             .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeInFavorite)
         }

@@ -24,11 +24,9 @@ struct MapView: View {
     @State
     var selection: Bool = false
     @State
-    var markers: [GMSMarker] = []
-    @State
     var zoomInCenter: Bool = false
     @State
-    var selectedMarker: GMSMarker?
+    var selectedMarker: GMSMarker? = nil
     @State
     var tappedCoordinate: CLLocationCoordinate2D? = nil
     @State
@@ -41,6 +39,21 @@ struct MapView: View {
             if selection { listView }
             else { mapView }
             buttonView
+            if didTapped {
+                AddCafeView(cafeVM: cafeVM, didTapped: $didTapped, coordinate: $tappedCoordinate)
+                    .padding([.leading, .trailing], 18)
+                    .padding([.top, .bottom], 100)
+                    .cornerRadius(15)
+            }
+            if let _ = selectedMarker {
+                RoundedRectangle(cornerRadius: 15)
+                    .frame(height: UIScreen.main.bounds.height * 0.5)
+                    .transition(.slide)
+                    .animation(.easeInOut)
+                    .onAppear {
+                        print("HI")
+                    }
+            }
         }
         .onAppear { configure() }
         .edgesIgnoringSafeArea(.all)
@@ -70,15 +83,13 @@ extension MapView {
     }
     
     private var mapView: some View {
-        ZStack {
-            GMView(markers: $markers, selectedMarker: $selectedMarker, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
+        VStack {
+            GMView(markers: $cafeVM.markers, selectedMarker: $selectedMarker, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
                 self.zoomInCenter = true
             }
+//            .frame(height: selectedMarker != nil ? UIScreen.main.bounds.height * 0.5 : UIScreen.main.bounds.height)
                 .animation(.easeIn)
-                .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
-            if didTapped {
-                
-            }
+//                .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
         }
     }
 
@@ -126,11 +137,6 @@ extension MapView {
     private func configure() {
         cafeVM.configureUser(user: userVM.user!)
         cafeVM.getCafe()
-        markers = cafeVM.cafes.map {
-            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude))
-            marker.title = $0.title
-            return marker
-        }
     }
     
 }

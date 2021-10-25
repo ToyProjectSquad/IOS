@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import GoogleMaps
 import CoreData
 
 class CafeViewModel: ObservableObject {
     
     @Published
     var cafes: [Cafe] = []
+    @Published
+    var markers: [GMSMarker] = []
     
     var user: User? = nil
     var sortDescriptor: String = "creationDate"
@@ -30,6 +33,11 @@ class CafeViewModel: ObservableObject {
             
             do {
                 cafes = try controller.viewContext.fetch(request)
+                markers = cafes.map {
+                    let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude))
+                    marker.title = $0.title
+                    return marker
+                }
             } catch {
                 fatalError("ERROR: Can't get cafes")
             }
@@ -45,6 +53,7 @@ class CafeViewModel: ObservableObject {
         newCafe.image = image.pngData()
         newCafe.content = content
         newCafe.creationDate = Date()
+        newCafe.user = user
         
         controller.save()
         getCafe()
