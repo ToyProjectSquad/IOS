@@ -3,6 +3,7 @@
     <entity name="Cafe" representedClassName="Cafe" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="grade" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -39,7 +40,7 @@
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="History" inverseName="user" inverseEntity="History"/>
     </entity>
     <elements>
-        <element name="Cafe" positionX="179.7601318359375" positionY="-72.716552734375" width="128" height="163"/>
+        <element name="Cafe" positionX="179.7601318359375" positionY="-72.716552734375" width="128" height="164"/>
         <element name="Coffee" positionX="-388.6322631835938" positionY="-60.8006591796875" width="128" height="164"/>
         <element name="Favorite" positionX="-100.80615234375" positionY="201.9337158203125" width="128" height="73"/>
         <element name="History" positionX="-117.3482666015625" positionY="-285.8388366699219" width="128" height="88"/>

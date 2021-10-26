@@ -26,11 +26,13 @@ struct MapView: View {
     @State
     var zoomInCenter: Bool = false
     @State
-    var selectedMarker: GMSMarker? = nil
-    @State
     var tappedCoordinate: CLLocationCoordinate2D? = nil
     @State
     var didTapped: Bool = false
+    @State
+    var yDragTranslation: CGFloat = 0
+    
+    private let detailViewHeight: CGFloat = UIScreen.main.bounds.height * 0.4
 
     // MARK: - INIT
     var body: some View {
@@ -39,24 +41,9 @@ struct MapView: View {
             if selection { listView }
             else { mapView }
             buttonView
-            if didTapped {
-                AddCafeView(cafeVM: cafeVM, didTapped: $didTapped, coordinate: $tappedCoordinate)
-                    .padding([.leading, .trailing], 18)
-                    .padding([.top, .bottom], 100)
-                    .cornerRadius(15)
-            }
-            if let _ = selectedMarker {
-                RoundedRectangle(cornerRadius: 15)
-                    .frame(height: UIScreen.main.bounds.height * 0.5)
-                    .transition(.slide)
-                    .animation(.easeInOut)
-                    .onAppear {
-                        print("HI")
-                    }
-            }
         }
         .onAppear { configure() }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
     }
 }
@@ -83,14 +70,50 @@ extension MapView {
     }
     
     private var mapView: some View {
-        VStack {
-            GMView(markers: $cafeVM.markers, selectedMarker: $selectedMarker, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
-                self.zoomInCenter = true
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                ZStack {
+                    GMView(cafeVM: cafeVM, markers: $cafeVM.markers, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
+                        self.zoomInCenter = true
+                    }
+                    .animation(.easeIn(duration: 0.5))
+                    if didTapped {
+                        AddCafeView(cafeVM: cafeVM, didTapped: $didTapped, coordinate: $tappedCoordinate)
+                            .padding([.leading, .trailing], 18)
+                            .padding([.top, .bottom], 100)
+                            .cornerRadius(15)
+                            .transition(AnyTransition.scale.animation(.easeInOut))
+                    }
+                }
+                if let _ = cafeVM.selectedMarker {
+                    VStack {
+                        Spacer()
+                        DetailCafeView(selectedCafe: $cafeVM.selectedCafe, content: $cafeVM.selectedCafeContent)
+                            .cornerRadius(15, corners: [.topLeft, .topRight])
+                            .frame(height: geometry.size.height * 0.4 - yDragTranslation)
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -5)
+                    }
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeInOut(duration: 0.7))
+                    .gesture(
+                        DragGesture().onChanged { value in
+                            if value.translation.height > geometry.size.height * 0.4 {
+                                self.yDragTranslation = geometry.size.height * 0.4
+                            }
+                            else {
+                                self.yDragTranslation = value.translation.height
+                            }
+                        }.onEnded { value in
+                            if self.yDragTranslation > geometry.size.height * 0.4 * 0.5 {
+                                self.cafeVM.selectedMarker = nil
+                            }
+                            self.yDragTranslation = 0
+                        }
+                    )
+                }
             }
-//            .frame(height: selectedMarker != nil ? UIScreen.main.bounds.height * 0.5 : UIScreen.main.bounds.height)
-                .animation(.easeIn)
-//                .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
         }
+        
     }
 
     private var cafeListView: some View {

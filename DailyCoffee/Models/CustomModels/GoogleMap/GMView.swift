@@ -11,11 +11,12 @@ import CoreLocation
 
 struct GMView: UIViewRepresentable {
     // MARK: - VARIABLES
+    @ObservedObject
+    var cafeVM: CafeViewModel
+    
     // Binding
     @Binding
     var markers: [GMSMarker]
-    @Binding
-    var selectedMarker: GMSMarker?
     @Binding
     var tappedCoordinate: CLLocationCoordinate2D?
     @Binding
@@ -31,8 +32,8 @@ struct GMView: UIViewRepresentable {
     // MARK: - MAKE UI VIEW
     func makeUIView(context: Context) -> GMSMapView {
         // Default Coordinate
-        let sanFrancisco = CLLocationCoordinate2D(latitude: 37.7576, longitude: -122.4194)
-        gmsMapView.camera = GMSCameraPosition.camera(withTarget: sanFrancisco, zoom: defaultZoomLevel)
+        let Seoul = CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780)
+        gmsMapView.camera = GMSCameraPosition.camera(withTarget: Seoul, zoom: defaultZoomLevel)
         gmsMapView.delegate = context.coordinator
         gmsMapView.isUserInteractionEnabled = true
         return gmsMapView
@@ -72,10 +73,10 @@ struct GMView: UIViewRepresentable {
             let camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: 10)
             CATransaction.begin()
             CATransaction.setValue(NSNumber(floatLiteral: 0.5), forKey: kCATransactionAnimationDuration)
-            mapView.animate(with: GMSCameraUpdate.setCamera(camera))
+            self.mapView.gmsMapView.animate(with: GMSCameraUpdate.setCamera(camera))
             CATransaction.commit()
-            mapView.selectedMarker = marker
-            print("marker has tapped")
+            self.mapView.cafeVM.selectedMarker = marker
+            self.mapView.cafeVM.findCafeWithMarker()
             return true
         }
         

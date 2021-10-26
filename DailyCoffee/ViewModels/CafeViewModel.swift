@@ -15,6 +15,12 @@ class CafeViewModel: ObservableObject {
     var cafes: [Cafe] = []
     @Published
     var markers: [GMSMarker] = []
+    @Published
+    var selectedMarker: GMSMarker? = nil
+    @Published
+    var selectedCafe: Cafe? = nil
+    @Published
+    var selectedCafeContent: String = ""
     
     var user: User? = nil
     var sortDescriptor: String = "creationDate"
@@ -44,7 +50,7 @@ class CafeViewModel: ObservableObject {
         }
     }
     
-    func addCafe(title: String, latitude: Double, longitutde: Double, image: UIImage, content: String?) {
+    func addCafe(title: String, latitude: Double, longitutde: Double, grade: Int, image: UIImage, content: String?) {
         let newCafe = Cafe(context: controller.viewContext)
         newCafe.id = UUID().uuidString
         newCafe.title = title
@@ -54,6 +60,7 @@ class CafeViewModel: ObservableObject {
         newCafe.content = content
         newCafe.creationDate = Date()
         newCafe.user = user
+        newCafe.grade = Int16(grade)
         
         controller.save()
         getCafe()
@@ -71,6 +78,16 @@ class CafeViewModel: ObservableObject {
         controller.viewContext.delete(targetCafe)
         controller.save()
         getCafe()
+    }
+    
+    func findCafeWithMarker() {
+        if let selectedMarker = selectedMarker {
+            selectedCafe = self.cafes.filter {
+                $0.latitude == selectedMarker.position.latitude &&
+                $0.longitude == selectedMarker.position.longitude
+            }.first
+            selectedCafeContent = selectedCafe?.content ?? ""
+        }
     }
     
 }

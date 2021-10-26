@@ -141,7 +141,12 @@ extension AddCafeView {
     private var saveButton: some View {
         Button {
             withAnimation {
-                cafeVM.addCafe(title: title, latitude: coordinate?.latitude ?? 0, longitutde: coordinate?.longitude ?? 0, image: image, content: comment)
+                cafeVM.addCafe(title: title,
+                               latitude: coordinate?.latitude ?? 0,
+                               longitutde: coordinate?.longitude ?? 0,
+                               grade: grade,
+                               image: image,
+                               content: comment)
                 didTapped.toggle()
             }
         } label: {
@@ -156,9 +161,7 @@ extension AddCafeView {
     
     private var cancelButton: some View {
         Button {
-            withAnimation {
-                didTapped.toggle()
-            }
+            didTapped.toggle()
         } label: {
             Text("CANCEL")
                 .frame(width: 80)
