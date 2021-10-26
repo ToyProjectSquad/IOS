@@ -11,8 +11,6 @@ import CoreData
 class CoffeeViewModel: ObservableObject {
     
     @Published var coffees: [Coffee] = []
-//    @Published var dailyCoffees: [Coffee] = []
-//    @Published var favoriteCoffees: [Coffee] = []
     
     private var controller = DataController.instance
     private var user: User? = nil
@@ -131,6 +129,22 @@ class CoffeeViewModel: ObservableObject {
         controller.viewContext.delete(coffee)
         controller.save()
         getCoffeeWithHistory()
+    }
+    
+    func editCoffee(coffee: Coffee, caffeine: Double?=nil, size: Double?=nil, image: UIImage?=nil, title: String?=nil) {
+        if let caffeine = caffeine {
+            coffee.caffeine = caffeine
+        }
+        if let size = size {
+            coffee.size = size
+        }
+        if let image = image {
+            coffee.image = image.pngData()
+        }
+        if let title = title {
+            coffee.title = title
+        }
+        controller.save()
     }
     
 }

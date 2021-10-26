@@ -46,6 +46,7 @@ struct FavoriteView: View {
             .opacity(0.8)
             if detailVM.isPresent {
                 detailView
+                    .transition(AnyTransition.scale.animation(.easeInOut))
             }
         }
         .onAppear {
@@ -90,7 +91,7 @@ extension FavoriteView {
     private var plusButton: some View {
         Button {
             withAnimation {
-                detailVM.setEditMode()
+                detailVM.setCreateMode()
             }
         } label: {
             Image(systemName: "plus.app")
@@ -106,14 +107,18 @@ extension FavoriteView {
             ForEach(coffeeVM.coffees) { coffee in
                 Menu {
                     Button {
-                        coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        withAnimation {
+                            coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        }
                     } label: {
                         Text("Add to daily")
                     }
                     .disabled(selection == 0 ? true : false)
-                    
+
                     Button {
-                        detailVM.setSelectMode(coffee: coffee)
+                        withAnimation {
+                            detailVM.setSelectMode(coffee: coffee)
+                        }
                     } label: {
                         Text("Show detail")
                     }
@@ -135,11 +140,6 @@ extension FavoriteView {
                         }
                     }
                 }
-
-//                
-//                .contextMenu {
-//                    
-//                }
             }
             .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeInFavorite)
         }

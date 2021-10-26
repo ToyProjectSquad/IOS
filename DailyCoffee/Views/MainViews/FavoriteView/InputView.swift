@@ -30,9 +30,9 @@ struct InputView: View {
             lineView
             Spacer()
             HStack {
-                cancelButton
-                Spacer()
                 saveButton
+                Spacer()
+                cancelButton
             }
         }
         .frame(height: 240)
@@ -69,6 +69,7 @@ extension InputView {
             }
         } label: {
             Text("CANCEL")
+                .frame(width: 80)
                 .foregroundColor(.white)
                 .font(.system(size: 17, weight: .bold))
                 .padding(8)
@@ -84,6 +85,7 @@ extension InputView {
             }
         } label: {
             Text("SAVE")
+                .frame(width: 80)
                 .foregroundColor(.white)
                 .font(.system(size: 17, weight: .bold))
                 .padding(8)
