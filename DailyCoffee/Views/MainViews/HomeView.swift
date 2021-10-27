@@ -42,6 +42,7 @@ extension HomeView {
     
     private var commentView: some View {
         Text("향긋한 커피와 좋은 오후 보내세요")
+            .foregroundColor(Color("TextColor"))
             .font(.system(size: 35, weight: .bold))
             .lineLimit(2)
             .padding()
@@ -50,6 +51,7 @@ extension HomeView {
     private var caffeineView: some View {
         Text(String(format: "%.2f",
                     userVM.user!.maxFull != 0 ? coffeeVM.todayCaffeine / userVM.user!.maxFull * 100 : 0) + "%")
+            .foregroundColor(Color("TextColor"))
             .font(.system(size: 40, weight: .bold))
     }
     
