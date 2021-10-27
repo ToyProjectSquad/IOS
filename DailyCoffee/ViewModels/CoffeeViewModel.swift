@@ -10,9 +10,10 @@ import CoreData
 
 class CoffeeViewModel: ObservableObject {
     
-    @Published var coffees: [Coffee] = []
-//    @Published var dailyCoffees: [Coffee] = []
-//    @Published var favoriteCoffees: [Coffee] = []
+    @Published
+    var coffees: [Coffee] = []
+    @Published
+    var todayCaffeine: Double = 0
     
     private var controller = DataController.instance
     private var user: User? = nil
@@ -75,7 +76,7 @@ class CoffeeViewModel: ObservableObject {
         getCoffeeWithFavorite()
     }
     
-    func deleteCoffeeInFavorite(indexSet: IndexSet) {
+    func deleteCoffeeFromFavorite(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let object = coffees[index]
         controller.viewContext.delete(object)
@@ -91,17 +92,7 @@ class CoffeeViewModel: ObservableObject {
     }
     
     func addCoffeeToDaily(coffee: Coffee) {
-        getHistory(date: Date())
-        let todayHistory = histories.first!
-        let copiedObject: Coffee = Coffee(context: controller.viewContext)
-        copiedObject.id = UUID().uuidString
-        copiedObject.caffeine = coffee.caffeine
-        copiedObject.title = coffee.title
-        copiedObject.image = coffee.image
-        copiedObject.size = coffee.size
-        todayHistory.addToCoffees(copiedObject)
-        
-        controller.save()
+        addCoffeeToDaily(caffeine: coffee.caffeine, size: coffee.size, image: UIImage(data: coffee.image!)!, title: coffee.title ?? "")
     }
     
     func addCoffeeToDaily(caffeine: Double, size: Double, image: UIImage, title: String) {
@@ -114,6 +105,7 @@ class CoffeeViewModel: ObservableObject {
         newCoffee.image = image.pngData()
         newCoffee.size = size
         todayHistory.addToCoffees(newCoffee)
+        todayCaffeine += caffeine
         
         controller.save()
     }
@@ -121,6 +113,7 @@ class CoffeeViewModel: ObservableObject {
     func deleteCoffeeFromDaily(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let object = coffees[index]
+        todayCaffeine -= object.caffeine
         controller.viewContext.delete(object)
         
         controller.save()
@@ -128,9 +121,17 @@ class CoffeeViewModel: ObservableObject {
     }
     
     func deleteCoffeeFromDaily(coffee: Coffee) {
+        todayCaffeine -= coffee.caffeine
         controller.viewContext.delete(coffee)
         controller.save()
         getCoffeeWithHistory()
+    }
+    
+    func getTodayCaffeine() {
+        getCoffeeWithHistory()
+        for coffee in coffees {
+            todayCaffeine += coffee.caffeine
+        }
     }
     
 }

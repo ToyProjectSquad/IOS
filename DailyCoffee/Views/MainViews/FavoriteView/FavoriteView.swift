@@ -141,7 +141,7 @@ extension FavoriteView {
 //                    
 //                }
             }
-            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeInFavorite)
+            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeFromFavorite)
         }
     }
     
