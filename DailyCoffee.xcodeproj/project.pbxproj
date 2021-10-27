@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		040F0D05587FDF583FB1F2A0 /* Pods_DailyCoffeeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */; };
 		0D508C5D6B340F82C18377E9 /* Pods_DailyCoffee_DailyCoffeeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */; };
+		35B15FEE2728444400718E75 /* DetailCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B15FED2728444400718E75 /* DetailCafeViewModel.swift */; };
 		8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */; };
 		EB32401E2725349500A26BA0 /* GMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32401D2725349500A26BA0 /* GMView.swift */; };
 		EB324024272535EC00A26BA0 /* CafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB324023272535EC00A26BA0 /* CafeViewModel.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35B15FED2728444400718E75 /* DetailCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCafeViewModel.swift; sourceTree = "<group>"; };
 		598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffeeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB9648006DB019D1C7330E3 /* Pods-DailyCoffeeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffeeTests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffeeTests/Pods-DailyCoffeeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1242E6AAF44E61FE9D26F8 /* Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				EBB9F4AB2723C036000DE4E4 /* UserViewModel.swift */,
 				EBB9F4B12723DC15000DE4E4 /* CoffeeViewModel.swift */,
 				EB324023272535EC00A26BA0 /* CafeViewModel.swift */,
+				35B15FED2728444400718E75 /* DetailCafeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 			files = (
 				EB32401E2725349500A26BA0 /* GMView.swift in Sources */,
 				EB7943C42726D97100668698 /* DetailCafeView.swift in Sources */,
+				35B15FEE2728444400718E75 /* DetailCafeViewModel.swift in Sources */,
 				EBDE4FF7271D14E000A4FDBC /* FavoriteView.swift in Sources */,
 				EB32402927256E3000A26BA0 /* UIAlertControllerExtension.swift in Sources */,
 				EB324032272572F500A26BA0 /* AddCafeView.swift in Sources */,

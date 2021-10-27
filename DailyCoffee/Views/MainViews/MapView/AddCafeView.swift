@@ -9,15 +9,19 @@ import SwiftUI
 import CoreLocation
 
 struct AddCafeView: View {
+    // MARK: - VARIABLES
     
-    @ObservedObject
+    // Environment Object
+    @EnvironmentObject
     var cafeVM: CafeViewModel
     
+    // Binding
     @Binding
     var didTapped: Bool
     @Binding
     var coordinate: CLLocationCoordinate2D?
     
+    // State
     @State
     var grade: Int = 0
     @State
@@ -28,9 +32,11 @@ struct AddCafeView: View {
     var comment: String = ""
     @State
     var imageTapped: Bool = false
-
+    
+    // Public const var
     let commentPlaceholder: String = "Enter comment here.."
     
+    // MARK: - BODY
     var body: some View {
         ZStack {
             Color("Background")
@@ -66,6 +72,7 @@ struct AddCafeView: View {
     }
 }
 
+// MARK: - COMPONENTS
 extension AddCafeView {
 
     private var starView: some View {
