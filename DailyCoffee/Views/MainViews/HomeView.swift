@@ -49,8 +49,7 @@ extension HomeView {
     }
     
     private var caffeineView: some View {
-        Text(String(format: "%.2f",
-                    userVM.user!.maxFull != 0 ? coffeeVM.todayCaffeine / userVM.user!.maxFull * 100 : 0) + "%")
+        Text(String(Int(userVM.user!.maxFull != 0 ? coffeeVM.todayCaffeine / userVM.user!.maxFull * 100 : 0)) + "%")
             .foregroundColor(Color("TextColor"))
             .font(.system(size: 40, weight: .bold))
     }
