@@ -9,10 +9,9 @@ import SwiftUI
 
 struct HistoryView: View {
     var body: some View {
-        Color.red.ignoresSafeArea()
-            .overlay(
-                Text("This is history")
-            )
+        ZStack {
+            
+        }
     }
 }
 
