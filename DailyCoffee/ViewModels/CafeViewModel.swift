@@ -19,8 +19,6 @@ class CafeViewModel: ObservableObject {
     var selectedMarker: GMSMarker? = nil
     @Published
     var selectedCafe: Cafe? = nil
-    @Published
-    var selectedCafeContent: String = ""
     
     var user: User? = nil
     var sortDescriptor: String = "creationDate"
@@ -44,6 +42,7 @@ class CafeViewModel: ObservableObject {
                     marker.title = $0.title
                     return marker
                 }
+                print(markers.count)
             } catch {
                 fatalError("ERROR: Can't get cafes")
             }
@@ -80,13 +79,40 @@ class CafeViewModel: ObservableObject {
         getCafe()
     }
     
+    func editCafe(title: String? = nil,
+                  latitude: Double? = nil,
+                  longitutde: Double? = nil,
+                  grade: Int? = nil,
+                  image: UIImage? = nil,
+                  content: String? = nil) {
+        if let title = title {
+            selectedCafe?.title = title
+        }
+        if let content = content {
+            selectedCafe?.content = content
+        }
+        if let image = image {
+            selectedCafe?.image = image.pngData()
+        }
+        if let grade = grade {
+            selectedCafe?.grade = Int16(grade)
+        }
+        if let latitude = latitude {
+            selectedCafe?.latitude = latitude
+        }
+        if let longitutde = longitutde {
+            selectedCafe?.longitude = longitutde
+        }
+        
+        controller.save()
+    }
+    
     func findCafeWithMarker() {
         if let selectedMarker = selectedMarker {
             selectedCafe = self.cafes.filter {
                 $0.latitude == selectedMarker.position.latitude &&
                 $0.longitude == selectedMarker.position.longitude
             }.first
-            selectedCafeContent = selectedCafe?.content ?? ""
         }
     }
     

@@ -11,6 +11,8 @@ struct CustomTabView: View {
     
     @StateObject
     var coffeeVM: CoffeeViewModel = CoffeeViewModel()
+    @StateObject
+    var cafeVM: CafeViewModel = CafeViewModel()
     
     @State
     private var tabSelection: TabBarItem = .home
@@ -29,6 +31,7 @@ struct CustomTabView: View {
                 .tabBarItem(tab: .settings, selection: $tabSelection)
         }
         .environmentObject(coffeeVM)
+        .environmentObject(cafeVM)
         .sheet(isPresented: $favoriteViewPresented) {
             FavoriteView()
                 .environmentObject(coffeeVM)

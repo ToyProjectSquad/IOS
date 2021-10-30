@@ -16,6 +16,7 @@ struct DailyCoffeeApp: App {
     var userVM: UserViewModel = UserViewModel()
     
     @AppStorage("userID") var userID: String?
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {

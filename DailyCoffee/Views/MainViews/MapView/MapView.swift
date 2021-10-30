@@ -12,28 +12,25 @@ import CoreLocation
 struct MapView: View {
     // MARK: - VARIABLES
     
-    // State Object
-    @StateObject
-    var cafeVM: CafeViewModel = CafeViewModel()
-    
     // Environment Object
     @EnvironmentObject
+    var cafeVM: CafeViewModel
+    
+    @EnvironmentObject
     var userVM: UserViewModel
+    
+    // State Object
+    @StateObject
+    var detailCafeVM: DetailCafeViewModel = DetailCafeViewModel()
 
     // State
     @State
     var selection: Bool = false
     @State
-    var zoomInCenter: Bool = false
-    @State
     var tappedCoordinate: CLLocationCoordinate2D? = nil
     @State
     var didTapped: Bool = false
-    @State
-    var yDragTranslation: CGFloat = 0
     
-    private let detailViewHeight: CGFloat = UIScreen.main.bounds.height * 0.4
-
     // MARK: - INIT
     var body: some View {
         ZStack(alignment: .top) {
@@ -49,7 +46,6 @@ struct MapView: View {
 }
 
 // MARK: - COMPONENTS
-
 extension MapView {
     
     private var titleView: some View {
@@ -73,12 +69,9 @@ extension MapView {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 ZStack {
-                    GMView(cafeVM: cafeVM, markers: $cafeVM.markers, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
-                        self.zoomInCenter = true
-                    }
-                    .animation(.easeIn(duration: 0.5))
+                    GMView(markers: $cafeVM.markers, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped)
                     if didTapped {
-                        AddCafeView(cafeVM: cafeVM, didTapped: $didTapped, coordinate: $tappedCoordinate)
+                        AddCafeView(didTapped: $didTapped, coordinate: $tappedCoordinate)
                             .padding([.leading, .trailing], 18)
                             .padding([.top, .bottom], 100)
                             .cornerRadius(15)
@@ -86,33 +79,14 @@ extension MapView {
                     }
                 }
                 if let _ = cafeVM.selectedMarker {
-                    VStack {
-                        Spacer()
-                        DetailCafeView(selectedCafe: $cafeVM.selectedCafe, content: $cafeVM.selectedCafeContent)
-                            .cornerRadius(15, corners: [.topLeft, .topRight])
-                            .frame(height: geometry.size.height * 0.4 - yDragTranslation)
-                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -5)
-                    }
-                    .transition(.move(edge: .bottom))
-                    .animation(.easeInOut(duration: 0.7))
-                    .gesture(
-                        DragGesture().onChanged { value in
-                            if value.translation.height > geometry.size.height * 0.4 {
-                                self.yDragTranslation = geometry.size.height * 0.4
-                            }
-                            else {
-                                self.yDragTranslation = value.translation.height
-                            }
-                        }.onEnded { value in
-                            if self.yDragTranslation > geometry.size.height * 0.4 * 0.5 {
-                                self.cafeVM.selectedMarker = nil
-                            }
-                            self.yDragTranslation = 0
-                        }
-                    )
+                    DetailCafeView()
+                        .cornerRadius(15, corners: [.topLeft, .topRight])
+                        .frame(height: geometry.size.height * 0.5)
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -5)
                 }
             }
         }
+        .environmentObject(detailCafeVM)
         
     }
 
@@ -154,7 +128,6 @@ extension MapView {
 }
 
 // MARK: - FUNCTION
-
 extension MapView {
     
     private func configure() {

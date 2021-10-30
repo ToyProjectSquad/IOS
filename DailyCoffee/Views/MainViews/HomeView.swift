@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    @AppStorage("userID") var userID: String?
-    
+        
     @EnvironmentObject
     var userVM: UserViewModel
     @EnvironmentObject
