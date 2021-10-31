@@ -116,7 +116,11 @@ extension HistoryView {
                     Image("Ellipsis")
                         .padding()
                 }
-
+            }
+            if durationOption == 0 {
+                barChart
+            } else {
+                lineChart
             }
             Spacer()
         }
@@ -128,16 +132,11 @@ extension HistoryView {
     }
     
     private var lineChart: some View {
-        Text("")
-//        LineView(data: [8,23,54,32,12,37,7,23,43], style: Styles.lineChartStyleOne)
-//            .border(.black)
+        LineView(data: TestData.monthlyFirst, style: Styles.lineChartStyleOne)
     }
     
     private var barChart: some View {
-        Text("")
-//        BarChartView(data: ChartData(values: [("Jan", 2), ("Feb", 4), ("Mar", 8), ("Apr", 3), ("May", 11), ("Jun", 7)]),
-//                     title: "Bar Chart", form: ChartForm.extraLarge)
-//            .border(.black)
+        BarChartView(data: TestData.weekly)
     }
     
 }
