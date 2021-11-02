@@ -20,6 +20,8 @@
 		35BB6C8C272CEC6800ABAA36 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8B272CEC6800ABAA36 /* Line.swift */; };
 		35BB6C8E272CECA100ABAA36 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8D272CECA100ABAA36 /* IndicatorPoint.swift */; };
 		35BB6C90272CECE900ABAA36 /* PathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8F272CECE900ABAA36 /* PathExtension.swift */; };
+		35EBDBC02731482900904D5C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDBBF2731482900904D5C /* DateExtension.swift */; };
+		35EBDBC227314E6D00904D5C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDBC127314E6D00904D5C /* ChartViewModel.swift */; };
 		8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */; };
 		EB32401E2725349500A26BA0 /* GMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32401D2725349500A26BA0 /* GMView.swift */; };
 		EB324024272535EC00A26BA0 /* CafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB324023272535EC00A26BA0 /* CafeViewModel.swift */; };
@@ -89,6 +91,8 @@
 		35BB6C8B272CEC6800ABAA36 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		35BB6C8D272CECA100ABAA36 /* IndicatorPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
 		35BB6C8F272CECE900ABAA36 /* PathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathExtension.swift; sourceTree = "<group>"; };
+		35EBDBBF2731482900904D5C /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		35EBDBC127314E6D00904D5C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffeeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB9648006DB019D1C7330E3 /* Pods-DailyCoffeeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffeeTests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffeeTests/Pods-DailyCoffeeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1242E6AAF44E61FE9D26F8 /* Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 				EBB9F4B12723DC15000DE4E4 /* CoffeeViewModel.swift */,
 				EB324023272535EC00A26BA0 /* CafeViewModel.swift */,
 				35B15FED2728444400718E75 /* DetailCafeViewModel.swift */,
+				35EBDBC127314E6D00904D5C /* ChartViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				EB32402827256E3000A26BA0 /* UIAlertControllerExtension.swift */,
 				EB32402A27256E8F00A26BA0 /* ViewExtension.swift */,
 				35BB6C8F272CECE900ABAA36 /* PathExtension.swift */,
+				35EBDBBF2731482900904D5C /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35BB6C90272CECE900ABAA36 /* PathExtension.swift in Sources */,
+				35EBDBC02731482900904D5C /* DateExtension.swift in Sources */,
 				EB32401E2725349500A26BA0 /* GMView.swift in Sources */,
 				EB7943C42726D97100668698 /* DetailCafeView.swift in Sources */,
 				35BB6C8E272CECA100ABAA36 /* IndicatorPoint.swift in Sources */,
@@ -752,6 +759,7 @@
 				EBDE4FFF271D1FC600A4FDBC /* CustomAlertView.swift in Sources */,
 				EBDE4FFD271D1FBC00A4FDBC /* CustomTabBarView.swift in Sources */,
 				EBDE4FBC271D0B2200A4FDBC /* DailyCoffeeApp.swift in Sources */,
+				35EBDBC227314E6D00904D5C /* ChartViewModel.swift in Sources */,
 				EBDE5008271D464100A4FDBC /* CustomTabView.swift in Sources */,
 				EB32402727256D8400A26BA0 /* TextFieldAlert.swift in Sources */,
 				EB4034A82722884500B2C10D /* ImagePickerModel.swift in Sources */,
