@@ -12,28 +12,39 @@ class ChartViewModel: ObservableObject {
     
     @Published
     var coffees: [Coffee] = []
+    @Published
+    var weeklyCaffeine: [Double] = []
+    @Published
+    var monthlyCaffeine: [Double] = []
     
     private var controller = DataController.instance
     private var user: User? = nil
     private var histories: [History] = []
     
-    init() {
-        
-    }
+    
+    public let month: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
     func configureUser(user: User) {
         self.user = user
     }
     
-    func getWeekCoffeeWithHistory(date: Date) {
+    func getWeekCoffeeWithHistory(date: Date = Date()) {
         getWeekHistory(date: date)
         
-        var coffeeInHistory: [Coffee] = []
+        var data: [Double] = []
+        var caffeine: Double = 0
         
         for history in histories {
-            coffeeInHistory.append(contentsOf: history.coffees?.allObjects as? [Coffee] ?? [])
+            caffeine = 0
+            for coffee in history.coffees?.allObjects as? [Coffee] ?? [] {
+                caffeine += coffee.caffeine
+            }
+            data.append(caffeine)
         }
-        coffees.append(contentsOf: coffeeInHistory)
+        while data.count < 7 {
+            data.append(0)
+        }
+        weeklyCaffeine = data
     }
     
 }
