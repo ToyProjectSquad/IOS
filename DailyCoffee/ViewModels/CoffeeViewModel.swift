@@ -25,42 +25,24 @@ class CoffeeViewModel: ObservableObject {
     func getCoffeeWithHistory(date: Date = Date()) {
         getHistory(date: date)
         
-        let request: NSFetchRequest<Coffee> = Coffee.fetchRequest()
-        let predicate = NSPredicate(format: "consumedDate == %@", histories.first!)
-        request.predicate = predicate
-        request.sortDescriptors = []
-        
-        do {
-            coffees = try controller.viewContext.fetch(request)
-        } catch {
-            fatalError("ERROR: Can't get coffees with history")
-        }
+        coffees = histories.first!.coffees?.allObjects as? [Coffee] ?? []
     }
     
     func getCoffeeWithFavorite() {
         if let user = user {
-            print("Get coffee with favorite list...")
-            if user.favorite == nil {
+            if let favorite = user.favorite {
+                coffees = favorite.coffees?.allObjects as? [Coffee] ?? []
+            } else {
                 let  newFavorite = Favorite(context: controller.viewContext)
                 newFavorite.user = user
                 controller.save()
             }
-            let request: NSFetchRequest<Coffee> = Coffee.fetchRequest()
-            let predicate = NSPredicate(format: "favoriteList == %@", user.favorite!)
-            request.predicate = predicate
-            request.sortDescriptors = []
-            
-            do {
-                coffees = try controller.viewContext.fetch(request)
-            } catch {
-                fatalError("ERROR: Can't get coffees with favorite")
-            }
-            print("Successfully get coffees!\(coffees.count)")
         }
     }
     
     func addCoffeeToFavorite(title: String, image: UIImage, size: Double, caffeine: Double) {
         guard let user = user else { return }
+        guard let favorite = user.favorite else { return }
         
         let newCoffee = Coffee(context: controller.viewContext)
         newCoffee.caffeine = caffeine
@@ -69,7 +51,7 @@ class CoffeeViewModel: ObservableObject {
         newCoffee.size = size
         newCoffee.image = image.pngData()
         newCoffee.creationDate = Date()
-        newCoffee.favoriteList = user.favorite!
+        favorite.addToCoffees(newCoffee)
         
         controller.save()
         getCoffeeWithFavorite()
