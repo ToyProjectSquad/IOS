@@ -17,6 +17,8 @@ struct FavoriteView: View {
     // Environment Object
     @EnvironmentObject
     var coffeeVM: CoffeeViewModel
+    @EnvironmentObject
+    var chartVM: ChartViewModel
     
     // State
     @State
@@ -107,6 +109,7 @@ extension FavoriteView {
                 Menu {
                     Button {
                         coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        chartVM.getWeeklyCoffee()
                     } label: {
                         Text("Add to daily")
                     }
@@ -136,12 +139,15 @@ extension FavoriteView {
                     }
                 }
 
-//                
-//                .contextMenu {
-//                    
-//                }
             }
-            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeFromFavorite)
+            .onDelete { indexSet in
+                if selection == 0 {
+                    coffeeVM.deleteCoffeeFromDaily(indexSet: indexSet)
+                    chartVM.getWeeklyCoffee()
+                } else {
+                    coffeeVM.deleteCoffeeFromFavorite(indexSet: indexSet)
+                }
+            }
         }
     }
     

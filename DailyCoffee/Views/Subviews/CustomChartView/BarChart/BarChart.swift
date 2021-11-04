@@ -33,7 +33,7 @@ public struct BarChartView : View {
                     gradient: self.colorScheme == .dark ? self.darkModeStyle.gradientColor : self.style.gradientColor)
             .padding([.trailing, .leading, .top])
             .onAppear {
-                chartVM.getWeekCoffeeWithHistory()
+                chartVM.getWeeklyCoffee()
             }
     }
 }

@@ -15,9 +15,8 @@ struct HistoryView: View {
     var userVM: UserViewModel
     @EnvironmentObject
     var coffeeVM: CoffeeViewModel
-    
-    @StateObject
-    var chartVM: ChartViewModel = ChartViewModel()
+    @EnvironmentObject
+    var chartVM: ChartViewModel
     
     @State
     private var mode: Int = 0
@@ -143,9 +142,7 @@ extension HistoryView {
     }
     
     private var barChart: some View {
-        VStack(spacing: 0) {
-            BarChartView()
-        }
+        BarChartView()
     }
     
 }

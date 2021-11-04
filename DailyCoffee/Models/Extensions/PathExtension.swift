@@ -159,7 +159,7 @@ extension Path {
     
     static func linePathWithPoints(points:[Double], step:CGPoint) -> Path {
         var path = Path()
-        if (points.count < 2){
+        if points.count < 2 {
             return path
         }
         guard let offset = points.min() else { return path }
@@ -178,10 +178,10 @@ extension Path {
             return path
         }
         guard let offset = points.min() else { return path }
-        var p1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+        var p1 = CGPoint(x: 0, y: CGFloat(points[0] - offset) * step.y)
         path.move(to: p1)
         for pointIndex in 1..<points.count {
-            p1 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
+            p1 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y * CGFloat(points[pointIndex] - offset))
             path.addLine(to: p1)
         }
         path.addLine(to: CGPoint(x: p1.x, y: 0))
@@ -212,7 +212,7 @@ extension CGPoint {
         
         for i in 0..<Int(steps) {
             let t0 = CGFloat(i) / steps
-            let t1 = CGFloat(i+1) / steps
+            let t1 = CGFloat(i + 1) / steps
             let a = point(to: to, t: t0, control: control)
             let b = point(to: to, t: t1, control: control)
             
@@ -230,7 +230,6 @@ extension CGPoint {
             let t1 = CGFloat(i+1) / steps
             let a = point(to: to, t: t0, control: control)
             let b = point(to: to, t: t1, control: control)
-            
             if a.x >= x {
                 return dist
             } else if b.x > x {
@@ -240,7 +239,6 @@ extension CGPoint {
                 dist += a.line(to: b)
                 return dist
             }
-            
             dist += a.line(to: b)
         }
         return dist
