@@ -99,7 +99,6 @@ struct DetailView: View {
 
 // MARK: - COMPONENTS
 extension DetailView {
-    
     private var background: some View {
         Color("Background")
             .shadow(color: .black.opacity(0.7), radius: 5, x: 0, y: 5)
@@ -118,7 +117,6 @@ extension DetailView {
                     Text("Edit")
                 }
                 .disabled(detailVM.mode != 0 ? true : false)
-                
                 Button {
                     if let selectedCoffee = selectedCoffee {
                         coffeeVM.deleteCoffeeInFavorite(coffee: selectedCoffee)
@@ -127,7 +125,6 @@ extension DetailView {
                     Text("Delete")
                 }
                 .disabled(detailVM.mode != 0 ? true : false)
-                
                 Button {
                     coffeeVM.addCoffeeToDaily(caffeine: Double(caffeine) ?? 0, size: Double(size) ?? 0, image: image, title: title)
                     detailVM.setDefualtMode()
@@ -159,7 +156,7 @@ extension DetailView {
         Image(uiImage: image)
             .resizable()
             .frame(width: 150, height: 150)
-            .clipShape(Circle())
+            .cornerRadius(30)
             .onTapGesture {
                 if detailVM.mode != 0 && textfieldTapped == 0 {
                     photoModified.toggle()
@@ -258,5 +255,4 @@ extension DetailView {
                 .background(RoundedRectangle(cornerRadius: 15))
         }
     }
-    
 }
