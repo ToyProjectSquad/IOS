@@ -19,6 +19,7 @@ public struct BarChartCell : View {
     
     public var body: some View {
         VStack(spacing: 5) {
+            Spacer()
             RoundedRectangle(cornerRadius: 4)
                 .fill(LinearGradient(gradient: gradient?.getGradient() ?? GradientColor(start: accentColor, end: accentColor).getGradient(), startPoint: .bottom, endPoint: .top))
                 .frame(width: 25, height: height, alignment: .center)
@@ -27,6 +28,7 @@ public struct BarChartCell : View {
             Text(label)
                 .foregroundColor(Color("TextColor"))
                 .font(.system(size: 15, weight: .bold))
+            Spacer().frame(height: 8)
         }
     }
     

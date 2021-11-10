@@ -138,7 +138,7 @@ extension HistoryView {
     }
     
     private var lineChart: some View {
-        LineView(data: TestData.monthlyFirst, style: Styles.lineChartStyleOne)
+        LineView(style: Styles.lineChartStyleOne)
     }
     
     private var barChart: some View {

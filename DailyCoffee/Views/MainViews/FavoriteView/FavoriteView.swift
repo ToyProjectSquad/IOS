@@ -110,6 +110,7 @@ extension FavoriteView {
                     Button {
                         coffeeVM.addCoffeeToDaily(coffee: coffee)
                         chartVM.getWeeklyCoffee()
+                        chartVM.getMonthlyCoffee()
                     } label: {
                         Text("Add to daily")
                     }
@@ -144,6 +145,7 @@ extension FavoriteView {
                 if selection == 0 {
                     coffeeVM.deleteCoffeeFromDaily(indexSet: indexSet)
                     chartVM.getWeeklyCoffee()
+                    chartVM.getMonthlyCoffee()
                 } else {
                     coffeeVM.deleteCoffeeFromFavorite(indexSet: indexSet)
                 }

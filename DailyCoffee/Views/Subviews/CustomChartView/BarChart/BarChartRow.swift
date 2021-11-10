@@ -35,7 +35,7 @@ public struct BarChartRow : View {
                 ForEach(0..<self.data.count, id: \.self) { i in
                     BarChartCell(didTapped: .constant(selection == i),
                                  label: labelData[i],
-                                 height:  self.normalizedValue(index: i) * geometry.size.height,
+                                 height:  self.normalizedValue(index: i) * geometry.size.height * 0.8,
                                  accentColor: self.accentColor,
                                  gradient: self.gradient)
                         .onTapGesture {
