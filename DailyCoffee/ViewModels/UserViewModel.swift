@@ -34,7 +34,7 @@ final class UserViewModel: ObservableObject {
         newUser.id = id
         newUser.displayName = displayName
         newUser.maxFull = maxFull
-        newUser.displayName = ""
+        
         
         let favorite = Favorite(context: controller.viewContext)
         favorite.user = newUser
