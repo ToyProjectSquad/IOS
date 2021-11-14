@@ -52,7 +52,7 @@ struct DetailView: View {
             self.title = "이름"
             self.size = "0"
             self.caffeine = "0"
-            self.image = UIImage(named: "Placeholder")!
+            self.image = UIImage(named: "placeholder")!
         }
     }
     
