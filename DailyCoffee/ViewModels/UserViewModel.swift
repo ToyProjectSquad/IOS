@@ -44,6 +44,17 @@ final class UserViewModel: ObservableObject {
         configureUser()
     }
     
+    func editUser(displayName: String, comment:String, photo:UIImage){
+        if let user = user{
+            user.displayName = displayName
+            user.comment = comment
+            user.profileImage = photo.pngData()
+        }
+        
+        controller.save()
+        configureUser()
+    }
+    
     private func fetchUser() {
         if let id = id {
             let request: NSFetchRequest<User> = User.fetchRequest()

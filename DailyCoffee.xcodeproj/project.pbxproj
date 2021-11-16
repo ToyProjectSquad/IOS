@@ -11,6 +11,10 @@
 		0D508C5D6B340F82C18377E9 /* Pods_DailyCoffee_DailyCoffeeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */; };
 		35B15FEE2728444400718E75 /* DetailCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B15FED2728444400718E75 /* DetailCafeViewModel.swift */; };
 		8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */; };
+		AF94A45527426BC000D38043 /* MailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45427426BC000D38043 /* MailViewModel.swift */; };
+		AF94A45827426C1C00D38043 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45727426C1C00D38043 /* ProfileView.swift */; };
+		AF94A45C2743AD9800D38043 /* MakePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45B2743AD9800D38043 /* MakePeopleView.swift */; };
+		AF94A45E2743ADA800D38043 /* OpenSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45D2743ADA800D38043 /* OpenSourceView.swift */; };
 		EB32401E2725349500A26BA0 /* GMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32401D2725349500A26BA0 /* GMView.swift */; };
 		EB324024272535EC00A26BA0 /* CafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB324023272535EC00A26BA0 /* CafeViewModel.swift */; };
 		EB32402727256D8400A26BA0 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32402627256D8400A26BA0 /* TextFieldAlert.swift */; };
@@ -77,6 +81,10 @@
 		98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffee_DailyCoffeeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A585935A88948CA810DC5DE6 /* Pods-DailyCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee/Pods-DailyCoffee.release.xcconfig"; sourceTree = "<group>"; };
+		AF94A45427426BC000D38043 /* MailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewModel.swift; sourceTree = "<group>"; };
+		AF94A45727426C1C00D38043 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		AF94A45B2743AD9800D38043 /* MakePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePeopleView.swift; sourceTree = "<group>"; };
+		AF94A45D2743ADA800D38043 /* OpenSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceView.swift; sourceTree = "<group>"; };
 		B641307930231221C740A517 /* Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EB32401D2725349500A26BA0 /* GMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMView.swift; sourceTree = "<group>"; };
 		EB324023272535EC00A26BA0 /* CafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeViewModel.swift; sourceTree = "<group>"; };
@@ -173,6 +181,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AF94A45327426BA500D38043 /* MailViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF94A45427426BC000D38043 /* MailViewModel.swift */,
+			);
+			path = MailViewModel;
+			sourceTree = "<group>";
+		};
+		AF94A45627426C0000D38043 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */,
+				AF94A45727426C1C00D38043 /* ProfileView.swift */,
+				AF94A45B2743AD9800D38043 /* MakePeopleView.swift */,
+				AF94A45D2743ADA800D38043 /* OpenSourceView.swift */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
 		EB32402527256D6F00A26BA0 /* TextFieldAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +212,7 @@
 		EB32402C27256EBE00A26BA0 /* CustomModels */ = {
 			isa = PBXGroup;
 			children = (
+				AF94A45327426BA500D38043 /* MailViewModel */,
 				EB7943BF2726B43800668698 /* RoundedCorner */,
 				EB32403027256FF400A26BA0 /* ImagePicker */,
 				EB32402F27256FB000A26BA0 /* GoogleMap */,
@@ -355,7 +383,7 @@
 				EBB9F4A82723A42F000DE4E4 /* FavoriteView */,
 				EBDE4FF0271D148B00A4FDBC /* HomeView.swift */,
 				EBDE4FF2271D149300A4FDBC /* HistoryView.swift */,
-				EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */,
+				AF94A45627426C0000D38043 /* SettingView */,
 				EBDE5007271D464100A4FDBC /* CustomTabView.swift */,
 				EBB9F4AF2723C8B9000DE4E4 /* SetupView.swift */,
 			);
@@ -685,11 +713,15 @@
 				EB4034A82722884500B2C10D /* ImagePickerModel.swift in Sources */,
 				EB4034A627227F9700B2C10D /* DetailViewModel.swift in Sources */,
 				EBDE4FF1271D148B00A4FDBC /* HomeView.swift in Sources */,
+				AF94A45827426C1C00D38043 /* ProfileView.swift in Sources */,
 				EBDE4FC8271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld in Sources */,
+				AF94A45C2743AD9800D38043 /* MakePeopleView.swift in Sources */,
+				AF94A45E2743ADA800D38043 /* OpenSourceView.swift in Sources */,
 				EBB9F4AA2723A45E000DE4E4 /* InputView.swift in Sources */,
 				EBDE5002271D26DF00A4FDBC /* ColorExtension.swift in Sources */,
 				EBB9F4AC2723C036000DE4E4 /* UserViewModel.swift in Sources */,
 				EBDE5004271D3A6300A4FDBC /* CustomTabContainerView.swift in Sources */,
+				AF94A45527426BC000D38043 /* MailViewModel.swift in Sources */,
 				EBB9F4B02723C8B9000DE4E4 /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
