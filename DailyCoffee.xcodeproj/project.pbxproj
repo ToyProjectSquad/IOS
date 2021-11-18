@@ -274,11 +274,6 @@
 		EB32402C27256EBE00A26BA0 /* CustomModels */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				AF94A45327426BA500D38043 /* MailViewModel */,
-=======
-				35BB6C83272CEAF800ABAA36 /* CustomChart */,
->>>>>>> origin/feature/history
 				EB7943BF2726B43800668698 /* RoundedCorner */,
 				EB32403027256FF400A26BA0 /* ImagePicker */,
 				EB32402F27256FB000A26BA0 /* GoogleMap */,
@@ -797,11 +792,6 @@
 				35A274B6272E1ABC009EB0F4 /* Label.swift in Sources */,
 				EB4034A627227F9700B2C10D /* DetailViewModel.swift in Sources */,
 				EBDE4FF1271D148B00A4FDBC /* HomeView.swift in Sources */,
-<<<<<<< HEAD
-				AF94A45827426C1C00D38043 /* ProfileView.swift in Sources */,
-=======
-				35A274B0272E1A33009EB0F4 /* BarChart.swift in Sources */,
->>>>>>> origin/feature/history
 				EBDE4FC8271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld in Sources */,
 				AF94A45C2743AD9800D38043 /* MakePeopleView.swift in Sources */,
 				AF94A45E2743ADA800D38043 /* OpenSourceView.swift in Sources */,
@@ -810,11 +800,6 @@
 				EBB9F4AC2723C036000DE4E4 /* UserViewModel.swift in Sources */,
 				35A274B4272E1AA4009EB0F4 /* BarChartCell.swift in Sources */,
 				EBDE5004271D3A6300A4FDBC /* CustomTabContainerView.swift in Sources */,
-<<<<<<< HEAD
-				AF94A45527426BC000D38043 /* MailViewModel.swift in Sources */,
-=======
-				35BB6C8A272CEBAA00ABAA36 /* LineView.swift in Sources */,
->>>>>>> origin/feature/history
 				EBB9F4B02723C8B9000DE4E4 /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
