@@ -162,8 +162,7 @@ extension CoffeeViewModel {
 
     private func getDateStr(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         return dateFormatter.string(from: date)
     }

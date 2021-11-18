@@ -45,7 +45,6 @@ extension CustomTabBarView {
             Image("CoffeeCup")
         }
         .padding(.bottom, 60)
-
     }
     
     private func tabView(item: TabBarItem) -> some View {
