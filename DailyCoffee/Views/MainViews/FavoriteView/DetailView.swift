@@ -36,7 +36,6 @@ struct DetailView: View {
     
     // MARK: - INIT
     init(detailVM: DetailViewModel) {
-        print("Initialize detail view")
         self.detailVM = detailVM
         if let item = detailVM.selectedItem {
             self.title = item.title ?? "이름"
@@ -53,7 +52,7 @@ struct DetailView: View {
             self.title = "이름"
             self.size = "0"
             self.caffeine = "0"
-            self.image = UIImage(named: "Placeholder")!
+            self.image = UIImage(named: "placeholder")!
         }
     }
     
@@ -86,12 +85,7 @@ struct DetailView: View {
                     Spacer()
                 }
                 .blur(radius: textfieldTapped != 0 ? 20 : 0)
-                if textfieldTapped == 1 {
-                    InputView(inputText: $size, textfieldTapped: $textfieldTapped, placeholder: "Input size here...", unit: "ml")
-                }
-                else if textfieldTapped == 2 {
-                    InputView(inputText: $caffeine, textfieldTapped: $textfieldTapped, placeholder: "Input caffeine here...", unit: "mg")
-                }
+                inputView
             }
         }
         .onAppear {
@@ -105,7 +99,6 @@ struct DetailView: View {
 
 // MARK: - COMPONENTS
 extension DetailView {
-    
     private var background: some View {
         Color("Background")
             .shadow(color: .black.opacity(0.7), radius: 5, x: 0, y: 5)
@@ -117,28 +110,27 @@ extension DetailView {
             Spacer()
             Menu {
                 Button {
-                    detailVM.setEditMode()
+                    if let selectedCoffee = selectedCoffee {
+                        detailVM.setEditMode(coffee: selectedCoffee)
+                    }
                 } label: {
                     Text("Edit")
                 }
-                .disabled(detailVM.isEditMode ? true : false)
-                
+                .disabled(detailVM.mode != 0 ? true : false)
                 Button {
-                    if let coffee = selectedCoffee {
-                        coffeeVM.deleteCoffeeInFavorite(coffee: coffee)
+                    if let selectedCoffee = selectedCoffee {
+                        coffeeVM.deleteCoffeeInFavorite(coffee: selectedCoffee)
                     }
                 } label: {
                     Text("Delete")
                 }
-                .disabled(detailVM.isEditMode ? true : false)
-                
+                .disabled(detailVM.mode != 0 ? true : false)
                 Button {
                     coffeeVM.addCoffeeToDaily(caffeine: Double(caffeine) ?? 0, size: Double(size) ?? 0, image: image, title: title)
                     detailVM.setDefualtMode()
                 } label: {
                     Text("Add to daily")
                 }
-
             } label: {
                 Image("Ellipsis")
                     .padding(.trailing, 10)
@@ -148,19 +140,25 @@ extension DetailView {
     }
     
     private var titleView: some View {
-        TextField("", text: $title)
+        Text(title)
             .multilineTextAlignment(.center)
             .font(.system(size: 30, weight: .bold))
-            .disabled(detailVM.isEditMode && textfieldTapped == 0 ? false : true)
+            .onTapGesture {
+                withAnimation {
+                    if detailVM.mode != 0 {
+                        self.textfieldTapped = 3
+                    }
+                }
+            }
     }
     
     private var imageView: some View {
         Image(uiImage: image)
             .resizable()
             .frame(width: 150, height: 150)
-            .clipShape(Circle())
+            .cornerRadius(30)
             .onTapGesture {
-                if detailVM.isEditMode && textfieldTapped == 0{
+                if detailVM.mode != 0 && textfieldTapped == 0 {
                     photoModified.toggle()
                 }
             }
@@ -179,7 +177,7 @@ extension DetailView {
                 Text("Size: \(self.size)ml")
                     .onTapGesture {
                         withAnimation {
-                            if detailVM.isEditMode {
+                            if detailVM.mode != 0 {
                                 self.textfieldTapped = 1
                             }
                         }
@@ -188,7 +186,7 @@ extension DetailView {
                 Text("Caffeine: \(self.caffeine)mg")
                     .onTapGesture {
                         withAnimation {
-                            if detailVM.isEditMode {
+                            if detailVM.mode != 0 {
                                 self.textfieldTapped = 2
                             }
                         }
@@ -208,8 +206,10 @@ extension DetailView {
             else if textfieldTapped == 2 {
                 InputView(inputText: $caffeine, textfieldTapped: $textfieldTapped, placeholder: "Input caffeine here...", unit: "mg")
             }
+            else if textfieldTapped == 3 {
+                InputView(inputText: $title, textfieldTapped: $textfieldTapped, placeholder: "Input title here...", unit: "")
+            }
         }
-        .frame(height: 240)
     }
     
     private var saveButton: some View {
@@ -219,7 +219,14 @@ extension DetailView {
                 guard let size = Double(self.size) else { return }
                 guard let caffeine = Double(self.caffeine) else { return }
             
-                coffeeVM.addCoffeeToFavorite(title: title, image: image, size: size, caffeine: caffeine)
+                if detailVM.mode == 1 {
+                    coffeeVM.addCoffeeToFavorite(title: title, image: image, size: size, caffeine: caffeine)
+                }
+                else if detailVM.mode == 2 {
+                    if let selectedCoffee = detailVM.selectedItem {
+                        coffeeVM.editCoffee(coffee: selectedCoffee, caffeine: caffeine, size: size, image: image, title: title)
+                    }
+                }
                 detailVM.setDefualtMode()
             }
         } label: {
@@ -230,8 +237,8 @@ extension DetailView {
                 .padding(8)
                 .background(RoundedRectangle(cornerRadius: 15))
         }
-        .disabled(detailVM.isEditMode ? false : true)
-        .opacity(detailVM.isEditMode ? 1 : 0)
+        .disabled(detailVM.mode != 0 ? false : true)
+        .opacity(detailVM.mode != 0 ? 1 : 0)
     }
     
     private var cancelButton: some View {
@@ -248,5 +255,4 @@ extension DetailView {
                 .background(RoundedRectangle(cornerRadius: 15))
         }
     }
-    
 }

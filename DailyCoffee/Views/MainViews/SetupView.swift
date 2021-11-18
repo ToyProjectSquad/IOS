@@ -85,8 +85,7 @@ extension SetupView {
         Button {
             if self.verifyInfo() {
                 userID = UUID().uuidString
-                userVM.addUser(id: userID!, displayName: displayName, maxFull: maxCaffeine)
-                print(userID!)
+                userVM.addUser(id: userID!, displayName: displayName, maxFull: maxCaffeine, photo: UIImage(named: "placeholder")!)
                 isFinished = true
             }
             else {

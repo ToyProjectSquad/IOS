@@ -12,28 +12,25 @@ import CoreLocation
 struct MapView: View {
     // MARK: - VARIABLES
     
-    // State Object
-    @StateObject
-    var cafeVM: CafeViewModel = CafeViewModel()
-    
     // Environment Object
     @EnvironmentObject
+    var cafeVM: CafeViewModel
+    
+    @EnvironmentObject
     var userVM: UserViewModel
+    
+    // State Object
+    @StateObject
+    var detailCafeVM: DetailCafeViewModel = DetailCafeViewModel()
 
     // State
     @State
     var selection: Bool = false
     @State
-    var markers: [GMSMarker] = []
-    @State
-    var zoomInCenter: Bool = false
-    @State
-    var selectedMarker: GMSMarker?
-    @State
     var tappedCoordinate: CLLocationCoordinate2D? = nil
     @State
     var didTapped: Bool = false
-
+    
     // MARK: - INIT
     var body: some View {
         ZStack(alignment: .top) {
@@ -43,13 +40,12 @@ struct MapView: View {
             buttonView
         }
         .onAppear { configure() }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
     }
 }
 
 // MARK: - COMPONENTS
-
 extension MapView {
     
     private var titleView: some View {
@@ -70,16 +66,28 @@ extension MapView {
     }
     
     private var mapView: some View {
-        ZStack {
-            GMView(markers: $markers, selectedMarker: $selectedMarker, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped) {
-                self.zoomInCenter = true
-            }
-                .animation(.easeIn)
-                .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
-            if didTapped {
-                
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                ZStack {
+                    GMView(markers: $cafeVM.markers, tappedCoordinate: $tappedCoordinate, didTapped: $didTapped)
+                    if didTapped {
+                        AddCafeView(didTapped: $didTapped, coordinate: $tappedCoordinate)
+                            .padding([.leading, .trailing], 18)
+                            .padding([.top, .bottom], 100)
+                            .cornerRadius(15)
+                            .transition(AnyTransition.scale.animation(.easeInOut))
+                    }
+                }
+                if let _ = cafeVM.selectedMarker {
+                    DetailCafeView()
+                        .cornerRadius(15, corners: [.topLeft, .topRight])
+                        .frame(height: geometry.size.height * 0.5)
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -5)
+                }
             }
         }
+        .environmentObject(detailCafeVM)
+        
     }
 
     private var cafeListView: some View {
@@ -120,17 +128,11 @@ extension MapView {
 }
 
 // MARK: - FUNCTION
-
 extension MapView {
     
     private func configure() {
         cafeVM.configureUser(user: userVM.user!)
         cafeVM.getCafe()
-        markers = cafeVM.cafes.map {
-            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude))
-            marker.title = $0.title
-            return marker
-        }
     }
     
 }

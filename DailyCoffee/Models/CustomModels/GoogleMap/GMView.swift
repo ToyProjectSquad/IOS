@@ -11,45 +11,51 @@ import CoreLocation
 
 struct GMView: UIViewRepresentable {
     // MARK: - VARIABLES
+    
+    // User Defualts
+    @AppStorage("zoomLevel")
+    var zoomLevel: Double?
+    @AppStorage("latitude")
+    var latitude: Double?
+    @AppStorage("longitude")
+    var longitude: Double?
+    
+    // Environment Object
+    @EnvironmentObject
+    var cafeVM: CafeViewModel
+    @EnvironmentObject
+    var detailCafeVM: DetailCafeViewModel
+    
     // Binding
     @Binding
     var markers: [GMSMarker]
-    @Binding
-    var selectedMarker: GMSMarker?
     @Binding
     var tappedCoordinate: CLLocationCoordinate2D?
     @Binding
     var didTapped: Bool
     
-    // Public
-    var onAnimationEnded: () -> ()
-    
     // Private
     private let gmsMapView = GMSMapView(frame: .zero)
-    private let defaultZoomLevel: Float = 10
     
     // MARK: - MAKE UI VIEW
     func makeUIView(context: Context) -> GMSMapView {
         // Default Coordinate
-        let sanFrancisco = CLLocationCoordinate2D(latitude: 37.7576, longitude: -122.4194)
-        gmsMapView.camera = GMSCameraPosition.camera(withTarget: sanFrancisco, zoom: defaultZoomLevel)
+        if zoomLevel == nil {
+            zoomLevel = 10
+        }
+        let Seoul = CLLocationCoordinate2D(latitude: latitude ?? 37.5665, longitude: longitude ?? 126.9780)
+        gmsMapView.camera = GMSCameraPosition.camera(withTarget: Seoul, zoom: Float(zoomLevel!))
         gmsMapView.delegate = context.coordinator
         gmsMapView.isUserInteractionEnabled = true
+        
         return gmsMapView
     }
     
     // MARK: - UPDATE UI VIEW
     func updateUIView(_ uiView: GMSMapView, context: Context) {
+        uiView.clear()
         markers.forEach { marker in
             marker.map = uiView
-        }
-        if let selectedMarker = selectedMarker {
-            let camera = GMSCameraPosition.camera(withTarget: selectedMarker.position, zoom: defaultZoomLevel)
-            print("Animating to position \(selectedMarker.position)")
-            CATransaction.begin()
-            CATransaction.setValue(NSNumber(floatLiteral: 5), forKey: kCATransactionAnimationDuration)
-            gmsMapView.animate(with: GMSCameraUpdate.setCamera(camera))
-            CATransaction.commit()
         }
     }
     
@@ -65,14 +71,33 @@ struct GMView: UIViewRepresentable {
             self.mapView = mapView
         }
         
-        func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-            print("\(coordinate.longitude), \(coordinate.latitude) has tapped")
-            self.mapView.tappedCoordinate = coordinate
-            self.mapView.didTapped.toggle()
+        func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+            self.mapView.zoomLevel = Double(position.zoom)
+            self.mapView.latitude = Double(position.target.latitude)
+            self.mapView.longitude = Double(position.target.longitude)
+        }
+
+        func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+            self.mapView.cafeVM.selectedMarker = nil
         }
         
-        func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-            self.mapView.onAnimationEnded()
+        func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+            self.mapView.tappedCoordinate = coordinate
+            withAnimation {
+                self.mapView.didTapped.toggle()
+            }
+        }
+        
+        func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+            let camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: Float(self.mapView.zoomLevel ?? 3))
+            CATransaction.begin()
+            CATransaction.setValue(NSNumber(floatLiteral: 0.5), forKey: kCATransactionAnimationDuration)
+            self.mapView.gmsMapView.animate(with: GMSCameraUpdate.setCamera(camera))
+            CATransaction.commit()
+            self.mapView.cafeVM.selectedMarker = marker
+            self.mapView.cafeVM.findCafeWithMarker()
+            self.mapView.detailCafeVM.configure(selectedCafe: self.mapView.cafeVM.selectedCafe)
+            return true
         }
         
     }

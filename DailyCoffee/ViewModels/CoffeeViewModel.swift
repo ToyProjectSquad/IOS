@@ -9,10 +9,10 @@ import SwiftUI
 import CoreData
 
 class CoffeeViewModel: ObservableObject {
-    
-    @Published var coffees: [Coffee] = []
-//    @Published var dailyCoffees: [Coffee] = []
-//    @Published var favoriteCoffees: [Coffee] = []
+    @Published
+    var coffees: [Coffee] = []
+    @Published
+    var todayCaffeine: Double = 0
     
     private var controller = DataController.instance
     private var user: User? = nil
@@ -25,42 +25,24 @@ class CoffeeViewModel: ObservableObject {
     func getCoffeeWithHistory(date: Date = Date()) {
         getHistory(date: date)
         
-        let request: NSFetchRequest<Coffee> = Coffee.fetchRequest()
-        let predicate = NSPredicate(format: "consumedDate == %@", histories.first!)
-        request.predicate = predicate
-        request.sortDescriptors = []
-        
-        do {
-            coffees = try controller.viewContext.fetch(request)
-        } catch {
-            fatalError("ERROR: Can't get coffees with history")
-        }
+        coffees = histories.first!.coffees?.allObjects as? [Coffee] ?? []
     }
     
     func getCoffeeWithFavorite() {
         if let user = user {
-            print("Get coffee with favorite list...")
-            if user.favorite == nil {
+            if let favorite = user.favorite {
+                coffees = favorite.coffees?.allObjects as? [Coffee] ?? []
+            } else {
                 let  newFavorite = Favorite(context: controller.viewContext)
                 newFavorite.user = user
                 controller.save()
             }
-            let request: NSFetchRequest<Coffee> = Coffee.fetchRequest()
-            let predicate = NSPredicate(format: "favoriteList == %@", user.favorite!)
-            request.predicate = predicate
-            request.sortDescriptors = []
-            
-            do {
-                coffees = try controller.viewContext.fetch(request)
-            } catch {
-                fatalError("ERROR: Can't get coffees with favorite")
-            }
-            print("Successfully get coffees!\(coffees.count)")
         }
     }
     
     func addCoffeeToFavorite(title: String, image: UIImage, size: Double, caffeine: Double) {
         guard let user = user else { return }
+        guard let favorite = user.favorite else { return }
         
         let newCoffee = Coffee(context: controller.viewContext)
         newCoffee.caffeine = caffeine
@@ -69,13 +51,13 @@ class CoffeeViewModel: ObservableObject {
         newCoffee.size = size
         newCoffee.image = image.pngData()
         newCoffee.creationDate = Date()
-        newCoffee.favoriteList = user.favorite!
+        favorite.addToCoffees(newCoffee)
         
         controller.save()
         getCoffeeWithFavorite()
     }
     
-    func deleteCoffeeInFavorite(indexSet: IndexSet) {
+    func deleteCoffeeFromFavorite(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let object = coffees[index]
         controller.viewContext.delete(object)
@@ -91,17 +73,7 @@ class CoffeeViewModel: ObservableObject {
     }
     
     func addCoffeeToDaily(coffee: Coffee) {
-        getHistory(date: Date())
-        let todayHistory = histories.first!
-        let copiedObject: Coffee = Coffee(context: controller.viewContext)
-        copiedObject.id = UUID().uuidString
-        copiedObject.caffeine = coffee.caffeine
-        copiedObject.title = coffee.title
-        copiedObject.image = coffee.image
-        copiedObject.size = coffee.size
-        todayHistory.addToCoffees(copiedObject)
-        
-        controller.save()
+        addCoffeeToDaily(caffeine: coffee.caffeine, size: coffee.size, image: UIImage(data: coffee.image!)!, title: coffee.title ?? "")
     }
     
     func addCoffeeToDaily(caffeine: Double, size: Double, image: UIImage, title: String) {
@@ -114,6 +86,7 @@ class CoffeeViewModel: ObservableObject {
         newCoffee.image = image.pngData()
         newCoffee.size = size
         todayHistory.addToCoffees(newCoffee)
+        todayCaffeine += caffeine
         
         controller.save()
     }
@@ -121,6 +94,7 @@ class CoffeeViewModel: ObservableObject {
     func deleteCoffeeFromDaily(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let object = coffees[index]
+        todayCaffeine -= object.caffeine
         controller.viewContext.delete(object)
         
         controller.save()
@@ -128,9 +102,33 @@ class CoffeeViewModel: ObservableObject {
     }
     
     func deleteCoffeeFromDaily(coffee: Coffee) {
+        todayCaffeine -= coffee.caffeine
         controller.viewContext.delete(coffee)
         controller.save()
         getCoffeeWithHistory()
+    }
+    
+    func editCoffee(coffee: Coffee, caffeine: Double?=nil, size: Double?=nil, image: UIImage?=nil, title: String?=nil) {
+        if let caffeine = caffeine {
+            coffee.caffeine = caffeine
+        }
+        if let size = size {
+            coffee.size = size
+        }
+        if let image = image {
+            coffee.image = image.pngData()
+        }
+        if let title = title {
+            coffee.title = title
+        }
+        controller.save()
+    }
+        
+    func getTodayCaffeine() {
+        getCoffeeWithHistory()
+        for coffee in coffees {
+            todayCaffeine += coffee.caffeine
+        }
     }
     
 }
@@ -164,8 +162,7 @@ extension CoffeeViewModel {
 
     private func getDateStr(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         return dateFormatter.string(from: date)
     }

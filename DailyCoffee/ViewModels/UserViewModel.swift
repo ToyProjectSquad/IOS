@@ -28,16 +28,28 @@ final class UserViewModel: ObservableObject {
         user = fetchResult.first
     }
     
-    func addUser(id: String, displayName: String, maxFull: Double) {
+    func addUser(id: String, displayName: String, maxFull: Double, photo: UIImage) {
         self.id = id
         let newUser = User(context: controller.viewContext)
         newUser.id = id
         newUser.displayName = displayName
         newUser.maxFull = maxFull
-        newUser.displayName = ""
+        newUser.profileImage = photo.pngData()
+        newUser.comment = "안녕하세요.\(displayName)입니다."
         
         let favorite = Favorite(context: controller.viewContext)
         favorite.user = newUser
+        
+        controller.save()
+        configureUser()
+    }
+    
+    func editUser(displayName: String, comment:String, photo:UIImage){
+        if let user = user{
+            user.displayName = displayName
+            user.comment = comment
+            user.profileImage = photo.pngData()
+        }
         
         controller.save()
         configureUser()

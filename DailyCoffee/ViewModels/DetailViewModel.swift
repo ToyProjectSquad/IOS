@@ -8,28 +8,36 @@
 import SwiftUI
 
 class DetailViewModel: ObservableObject {
+    
     @Published
     var isPresent: Bool = false
     @Published
-    var isEditMode: Bool = false
+    var mode: Int = 0
     @Published
     var selectedItem: Coffee? = nil
     
-    func setEditMode() {
+    func setCreateMode() {
         isPresent = true
-        isEditMode = true
+        mode = 1
         selectedItem = nil
+    }
+    
+    func setEditMode(coffee: Coffee) {
+        isPresent = true
+        mode = 2
+        selectedItem = coffee
     }
     
     func setSelectMode(coffee: Coffee) {
         isPresent = true
-        isEditMode = false
+        mode = 0
         selectedItem = coffee
     }
     
     func setDefualtMode() {
         isPresent = false
-        isEditMode = false
+        mode = 0
         selectedItem = nil
     }
+    
 }

@@ -17,6 +17,8 @@ struct FavoriteView: View {
     // Environment Object
     @EnvironmentObject
     var coffeeVM: CoffeeViewModel
+    @EnvironmentObject
+    var chartVM: ChartViewModel
     
     // State
     @State
@@ -46,6 +48,7 @@ struct FavoriteView: View {
             .opacity(0.8)
             if detailVM.isPresent {
                 detailView
+                    .transition(AnyTransition.scale.animation(.easeInOut))
             }
         }
         .onAppear {
@@ -90,7 +93,7 @@ extension FavoriteView {
     private var plusButton: some View {
         Button {
             withAnimation {
-                detailVM.setEditMode()
+                detailVM.setCreateMode()
             }
         } label: {
             Image(systemName: "plus.app")
@@ -104,38 +107,61 @@ extension FavoriteView {
     private var contentView: some View {
         List {
             ForEach(coffeeVM.coffees) { coffee in
-                HStack {
-                    Image(uiImage: UIImage(data: coffee.image!) ?? UIImage(named: "Placeholder")!)
-                        .resizable()
-                        .frame(width: 55, height: 55)
-                        .cornerRadius(15)
-                        .shadow(color: .black, radius: 5, x: 0, y: 2)
-                        .padding(8)
-                    VStack(alignment: .leading) {
-                        Text(coffee.title ?? "Coffee")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(Color("TextColor"))
-                        Text("\(String(format: "%.2f", coffee.size))ml/\(String(format: "%.2f", coffee.caffeine))mg")
-                            .padding(.leading, 30)
-                            .font(.system(size: 15))
-                    }
-                }
-                .contextMenu {
+                Menu {
                     Button {
+<<<<<<< HEAD
+                        withAnimation {
+                            coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        }
+=======
                         coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        chartVM.getWeeklyCoffee()
+                        chartVM.getMonthlyCoffee()
+>>>>>>> origin/feature/history
                     } label: {
                         Text("Add to daily")
                     }
                     .disabled(selection == 0 ? true : false)
-                    
+
                     Button {
-                        detailVM.setSelectMode(coffee: coffee)
+                        withAnimation {
+                            detailVM.setSelectMode(coffee: coffee)
+                        }
                     } label: {
                         Text("Show detail")
                     }
+                } label: {
+                    HStack {
+                        Image(uiImage: UIImage(data: coffee.image!) ?? UIImage(named: "Placeholder")!)
+                            .resizable()
+                            .frame(width: 55, height: 55)
+                            .cornerRadius(15)
+                            .shadow(color: .black, radius: 5, x: 0, y: 2)
+                            .padding(8)
+                        VStack(alignment: .leading) {
+                            Text(coffee.title ?? "Coffee")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(String(format: "%.2f", coffee.size))ml/\(String(format: "%.2f", coffee.caffeine))mg")
+                                .padding(.leading, 30)
+                                .font(.system(size: 15))
+                        }
+                    }
+                }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/feature/history
+            }
+            .onDelete { indexSet in
+                if selection == 0 {
+                    coffeeVM.deleteCoffeeFromDaily(indexSet: indexSet)
+                    chartVM.getWeeklyCoffee()
+                    chartVM.getMonthlyCoffee()
+                } else {
+                    coffeeVM.deleteCoffeeFromFavorite(indexSet: indexSet)
                 }
             }
-            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeInFavorite)
         }
     }
     
