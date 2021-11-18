@@ -17,6 +17,8 @@ struct FavoriteView: View {
     // Environment Object
     @EnvironmentObject
     var coffeeVM: CoffeeViewModel
+    @EnvironmentObject
+    var chartVM: ChartViewModel
     
     // State
     @State
@@ -107,9 +109,15 @@ extension FavoriteView {
             ForEach(coffeeVM.coffees) { coffee in
                 Menu {
                     Button {
+<<<<<<< HEAD
                         withAnimation {
                             coffeeVM.addCoffeeToDaily(coffee: coffee)
                         }
+=======
+                        coffeeVM.addCoffeeToDaily(coffee: coffee)
+                        chartVM.getWeeklyCoffee()
+                        chartVM.getMonthlyCoffee()
+>>>>>>> origin/feature/history
                     } label: {
                         Text("Add to daily")
                     }
@@ -140,8 +148,20 @@ extension FavoriteView {
                         }
                     }
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/feature/history
             }
-            .onDelete(perform: selection == 0 ? coffeeVM.deleteCoffeeFromDaily : coffeeVM.deleteCoffeeFromFavorite)
+            .onDelete { indexSet in
+                if selection == 0 {
+                    coffeeVM.deleteCoffeeFromDaily(indexSet: indexSet)
+                    chartVM.getWeeklyCoffee()
+                    chartVM.getMonthlyCoffee()
+                } else {
+                    coffeeVM.deleteCoffeeFromFavorite(indexSet: indexSet)
+                }
+            }
         }
     }
     

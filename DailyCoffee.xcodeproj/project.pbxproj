@@ -9,12 +9,20 @@
 /* Begin PBXBuildFile section */
 		040F0D05587FDF583FB1F2A0 /* Pods_DailyCoffeeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */; };
 		0D508C5D6B340F82C18377E9 /* Pods_DailyCoffee_DailyCoffeeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */; };
+		355DE2AC27295E150016C0CE /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 355DE2AB27295E150016C0CE /* SwiftUICharts */; };
+		35A274B0272E1A33009EB0F4 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A274AF272E1A33009EB0F4 /* BarChart.swift */; };
+		35A274B2272E1A7C009EB0F4 /* BarChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A274B1272E1A7C009EB0F4 /* BarChartRow.swift */; };
+		35A274B4272E1AA4009EB0F4 /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A274B3272E1AA4009EB0F4 /* BarChartCell.swift */; };
+		35A274B6272E1ABC009EB0F4 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A274B5272E1ABC009EB0F4 /* Label.swift */; };
 		35B15FEE2728444400718E75 /* DetailCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B15FED2728444400718E75 /* DetailCafeViewModel.swift */; };
+		35BB6C85272CEB0700ABAA36 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C84272CEB0700ABAA36 /* Helper.swift */; };
+		35BB6C8A272CEBAA00ABAA36 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C89272CEBAA00ABAA36 /* LineView.swift */; };
+		35BB6C8C272CEC6800ABAA36 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8B272CEC6800ABAA36 /* Line.swift */; };
+		35BB6C8E272CECA100ABAA36 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8D272CECA100ABAA36 /* IndicatorPoint.swift */; };
+		35BB6C90272CECE900ABAA36 /* PathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB6C8F272CECE900ABAA36 /* PathExtension.swift */; };
+		35EBDBC02731482900904D5C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDBBF2731482900904D5C /* DateExtension.swift */; };
+		35EBDBC227314E6D00904D5C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDBC127314E6D00904D5C /* ChartViewModel.swift */; };
 		8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */; };
-		AF94A45527426BC000D38043 /* MailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45427426BC000D38043 /* MailViewModel.swift */; };
-		AF94A45827426C1C00D38043 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45727426C1C00D38043 /* ProfileView.swift */; };
-		AF94A45C2743AD9800D38043 /* MakePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45B2743AD9800D38043 /* MakePeopleView.swift */; };
-		AF94A45E2743ADA800D38043 /* OpenSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF94A45D2743ADA800D38043 /* OpenSourceView.swift */; };
 		EB32401E2725349500A26BA0 /* GMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32401D2725349500A26BA0 /* GMView.swift */; };
 		EB324024272535EC00A26BA0 /* CafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB324023272535EC00A26BA0 /* CafeViewModel.swift */; };
 		EB32402727256D8400A26BA0 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32402627256D8400A26BA0 /* TextFieldAlert.swift */; };
@@ -73,7 +81,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35A274AF272E1A33009EB0F4 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		35A274B1272E1A7C009EB0F4 /* BarChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartRow.swift; sourceTree = "<group>"; };
+		35A274B3272E1AA4009EB0F4 /* BarChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCell.swift; sourceTree = "<group>"; };
+		35A274B5272E1ABC009EB0F4 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		35B15FED2728444400718E75 /* DetailCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCafeViewModel.swift; sourceTree = "<group>"; };
+		35BB6C84272CEB0700ABAA36 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		35BB6C89272CEBAA00ABAA36 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		35BB6C8B272CEC6800ABAA36 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		35BB6C8D272CECA100ABAA36 /* IndicatorPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
+		35BB6C8F272CECE900ABAA36 /* PathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathExtension.swift; sourceTree = "<group>"; };
+		35EBDBBF2731482900904D5C /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		35EBDBC127314E6D00904D5C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		598842B2CEF1C336BA0D004B /* Pods_DailyCoffeeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffeeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB9648006DB019D1C7330E3 /* Pods-DailyCoffeeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffeeTests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffeeTests/Pods-DailyCoffeeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1242E6AAF44E61FE9D26F8 /* Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,10 +100,6 @@
 		98930E2EA578BD1805BE9DB5 /* Pods_DailyCoffee_DailyCoffeeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffee_DailyCoffeeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A25FD2107DC1168D713393 /* Pods_DailyCoffee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyCoffee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A585935A88948CA810DC5DE6 /* Pods-DailyCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee/Pods-DailyCoffee.release.xcconfig"; sourceTree = "<group>"; };
-		AF94A45427426BC000D38043 /* MailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewModel.swift; sourceTree = "<group>"; };
-		AF94A45727426C1C00D38043 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		AF94A45B2743AD9800D38043 /* MakePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePeopleView.swift; sourceTree = "<group>"; };
-		AF94A45D2743ADA800D38043 /* OpenSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceView.swift; sourceTree = "<group>"; };
 		B641307930231221C740A517 /* Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; path = "Target Support Files/Pods-DailyCoffee-DailyCoffeeUITests/Pods-DailyCoffee-DailyCoffeeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EB32401D2725349500A26BA0 /* GMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMView.swift; sourceTree = "<group>"; };
 		EB324023272535EC00A26BA0 /* CafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C150150138B8EE07F2E2262 /* Pods_DailyCoffee.framework in Frameworks */,
+				355DE2AC27295E150016C0CE /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +174,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35BB6C83272CEAF800ABAA36 /* CustomChart */ = {
+			isa = PBXGroup;
+			children = (
+				35BB6C84272CEB0700ABAA36 /* Helper.swift */,
+			);
+			path = CustomChart;
+			sourceTree = "<group>";
+		};
+		35BB6C86272CEB6600ABAA36 /* CustomChartView */ = {
+			isa = PBXGroup;
+			children = (
+				35BB6C88272CEB7500ABAA36 /* BarChart */,
+				35BB6C87272CEB6E00ABAA36 /* LineChart */,
+			);
+			path = CustomChartView;
+			sourceTree = "<group>";
+		};
+		35BB6C87272CEB6E00ABAA36 /* LineChart */ = {
+			isa = PBXGroup;
+			children = (
+				35BB6C89272CEBAA00ABAA36 /* LineView.swift */,
+				35BB6C8B272CEC6800ABAA36 /* Line.swift */,
+				35BB6C8D272CECA100ABAA36 /* IndicatorPoint.swift */,
+			);
+			path = LineChart;
+			sourceTree = "<group>";
+		};
+		35BB6C88272CEB7500ABAA36 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				35A274AF272E1A33009EB0F4 /* BarChart.swift */,
+				35A274B1272E1A7C009EB0F4 /* BarChartRow.swift */,
+				35A274B3272E1AA4009EB0F4 /* BarChartCell.swift */,
+				35A274B5272E1ABC009EB0F4 /* Label.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
 		6C580FCBCA151737967EE561 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,25 +235,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AF94A45327426BA500D38043 /* MailViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				AF94A45427426BC000D38043 /* MailViewModel.swift */,
-			);
-			path = MailViewModel;
-			sourceTree = "<group>";
-		};
-		AF94A45627426C0000D38043 /* SettingView */ = {
-			isa = PBXGroup;
-			children = (
-				EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */,
-				AF94A45727426C1C00D38043 /* ProfileView.swift */,
-				AF94A45B2743AD9800D38043 /* MakePeopleView.swift */,
-				AF94A45D2743ADA800D38043 /* OpenSourceView.swift */,
-			);
-			path = SettingView;
-			sourceTree = "<group>";
-		};
 		EB32402527256D6F00A26BA0 /* TextFieldAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +247,6 @@
 		EB32402C27256EBE00A26BA0 /* CustomModels */ = {
 			isa = PBXGroup;
 			children = (
-				AF94A45327426BA500D38043 /* MailViewModel */,
 				EB7943BF2726B43800668698 /* RoundedCorner */,
 				EB32403027256FF400A26BA0 /* ImagePicker */,
 				EB32402F27256FB000A26BA0 /* GoogleMap */,
@@ -245,6 +279,7 @@
 				EBB9F4B12723DC15000DE4E4 /* CoffeeViewModel.swift */,
 				EB324023272535EC00A26BA0 /* CafeViewModel.swift */,
 				35B15FED2728444400718E75 /* DetailCafeViewModel.swift */,
+				35EBDBC127314E6D00904D5C /* ChartViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -370,6 +405,7 @@
 		EBDE4FEE271D145B00A4FDBC /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				35BB6C86272CEB6600ABAA36 /* CustomChartView */,
 				EBDE4FFE271D1FC600A4FDBC /* CustomAlertView.swift */,
 				EBDE5009271D495600A4FDBC /* CustomTabView */,
 			);
@@ -383,7 +419,7 @@
 				EBB9F4A82723A42F000DE4E4 /* FavoriteView */,
 				EBDE4FF0271D148B00A4FDBC /* HomeView.swift */,
 				EBDE4FF2271D149300A4FDBC /* HistoryView.swift */,
-				AF94A45627426C0000D38043 /* SettingView */,
+				EBDE4FFA271D1FA900A4FDBC /* SettingsView.swift */,
 				EBDE5007271D464100A4FDBC /* CustomTabView.swift */,
 				EBB9F4AF2723C8B9000DE4E4 /* SetupView.swift */,
 			);
@@ -396,6 +432,8 @@
 				EBDE5001271D26DF00A4FDBC /* ColorExtension.swift */,
 				EB32402827256E3000A26BA0 /* UIAlertControllerExtension.swift */,
 				EB32402A27256E8F00A26BA0 /* ViewExtension.swift */,
+				35BB6C8F272CECE900ABAA36 /* PathExtension.swift */,
+				35EBDBBF2731482900904D5C /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -430,6 +468,9 @@
 			dependencies = (
 			);
 			name = DailyCoffee;
+			packageProductDependencies = (
+				355DE2AB27295E150016C0CE /* SwiftUICharts */,
+			);
 			productName = DailyCoffee;
 			productReference = EBDE4FB8271D0B2200A4FDBC /* DailyCoffee.app */;
 			productType = "com.apple.product-type.application";
@@ -506,6 +547,9 @@
 				Base,
 			);
 			mainGroup = EBDE4FAF271D0B2200A4FDBC;
+			packageReferences = (
+				355DE2AA27295E150016C0CE /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = EBDE4FB9271D0B2200A4FDBC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -687,8 +731,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35BB6C90272CECE900ABAA36 /* PathExtension.swift in Sources */,
+				35EBDBC02731482900904D5C /* DateExtension.swift in Sources */,
 				EB32401E2725349500A26BA0 /* GMView.swift in Sources */,
 				EB7943C42726D97100668698 /* DetailCafeView.swift in Sources */,
+				35BB6C8E272CECA100ABAA36 /* IndicatorPoint.swift in Sources */,
 				35B15FEE2728444400718E75 /* DetailCafeViewModel.swift in Sources */,
 				EBDE4FF7271D14E000A4FDBC /* FavoriteView.swift in Sources */,
 				EB32402927256E3000A26BA0 /* UIAlertControllerExtension.swift in Sources */,
@@ -698,30 +745,32 @@
 				EBDE500B271D498100A4FDBC /* CustomTabBarItem.swift in Sources */,
 				EB32402E27256ED100A26BA0 /* AlertWrapper.swift in Sources */,
 				EBB9F4B22723DC15000DE4E4 /* CoffeeViewModel.swift in Sources */,
+				35BB6C85272CEB0700ABAA36 /* Helper.swift in Sources */,
 				EBDE4FF5271D149D00A4FDBC /* MapView.swift in Sources */,
 				EBB9F4AE2723C0CF000DE4E4 /* DataController.swift in Sources */,
 				EB32402B27256E8F00A26BA0 /* ViewExtension.swift in Sources */,
 				EB7943C12726B44F00668698 /* RoundedCorner.swift in Sources */,
 				EBDE4FF3271D149300A4FDBC /* HistoryView.swift in Sources */,
+				35A274B2272E1A7C009EB0F4 /* BarChartRow.swift in Sources */,
 				EBDE5006271D437B00A4FDBC /* CustomTabPreferenceKey.swift in Sources */,
 				EBDE4FFB271D1FA900A4FDBC /* SettingsView.swift in Sources */,
+				35BB6C8C272CEC6800ABAA36 /* Line.swift in Sources */,
 				EBDE4FFF271D1FC600A4FDBC /* CustomAlertView.swift in Sources */,
 				EBDE4FFD271D1FBC00A4FDBC /* CustomTabBarView.swift in Sources */,
 				EBDE4FBC271D0B2200A4FDBC /* DailyCoffeeApp.swift in Sources */,
+				35EBDBC227314E6D00904D5C /* ChartViewModel.swift in Sources */,
 				EBDE5008271D464100A4FDBC /* CustomTabView.swift in Sources */,
 				EB32402727256D8400A26BA0 /* TextFieldAlert.swift in Sources */,
 				EB4034A82722884500B2C10D /* ImagePickerModel.swift in Sources */,
+				35A274B6272E1ABC009EB0F4 /* Label.swift in Sources */,
 				EB4034A627227F9700B2C10D /* DetailViewModel.swift in Sources */,
 				EBDE4FF1271D148B00A4FDBC /* HomeView.swift in Sources */,
-				AF94A45827426C1C00D38043 /* ProfileView.swift in Sources */,
 				EBDE4FC8271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld in Sources */,
-				AF94A45C2743AD9800D38043 /* MakePeopleView.swift in Sources */,
-				AF94A45E2743ADA800D38043 /* OpenSourceView.swift in Sources */,
 				EBB9F4AA2723A45E000DE4E4 /* InputView.swift in Sources */,
 				EBDE5002271D26DF00A4FDBC /* ColorExtension.swift in Sources */,
 				EBB9F4AC2723C036000DE4E4 /* UserViewModel.swift in Sources */,
+				35A274B4272E1AA4009EB0F4 /* BarChartCell.swift in Sources */,
 				EBDE5004271D3A6300A4FDBC /* CustomTabContainerView.swift in Sources */,
-				AF94A45527426BC000D38043 /* MailViewModel.swift in Sources */,
 				EBB9F4B02723C8B9000DE4E4 /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1083,6 +1132,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		355DE2AA27295E150016C0CE /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		355DE2AB27295E150016C0CE /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 355DE2AA27295E150016C0CE /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EBDE4FC6271D0B2300A4FDBC /* DailyCoffee.xcdatamodeld */ = {
